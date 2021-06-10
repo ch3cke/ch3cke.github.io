@@ -21,7 +21,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"ch3cke.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"ch3cke.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="Author: ch3cke 0x00 签到题 文件连接：点击下载 直接在本地运行，会调用摄像头识别人脸，如果有三个人出现就会在运行终端出现flag;(不过识别不是那么精确，感有时候一个人也可以)  1flag&amp;#123;87e37d95-6a48-4463-aff8-b0dbd27d3b7d&amp;#125;    0x01 saleae 文件地址：点击下载 打开压缩包，发现是一个saleae.log">
@@ -138,6 +138,7 @@
 
   <div class="site-nav-right">
     <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
     </div>
   </div>
 </div>
@@ -167,11 +168,38 @@
     <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
 
   </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
   </ul>
 </nav>
 
 
 
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="Searching..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
 
 </div>
     </header>
@@ -241,6 +269,27 @@
               <span class="post-meta-item-text">Views: </span>
               <span class="leancloud-visitors-count"></span>
             </span>
+            <span class="post-meta-item" title="Views" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">Views: </span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine: </span>
+    
+    <a title="valine" href="/2019/04/23/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B-Writeup/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2019/04/23/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B-Writeup/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
 
         </div>
       </header>
@@ -256,7 +305,7 @@
 <p>文件连接：<a target="_blank" rel="noopener" href="https://github.com/ch3cke/challenges/raw/master/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%9B%BD%E8%B5%9B/qiandao_32ac2a19cef66c300e29fafac57b9e1a%20(1).zip">点击下载</a></p>
 <p>直接在本地运行，会调用摄像头识别人脸，如果有三个人出现就会在运行终端出现flag;(不过识别不是那么精确，感有时候一个人也可以)</p>
 <p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/%E7%AD%BE%E5%88%B0.png" alt="签到flag"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;87e37d95-6a48-4463-aff8-b0dbd27d3b7d&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">flag</span>&#123;<span class="number">87</span>e<span class="number">37</span>d<span class="number">95</span>-<span class="number">6</span>a<span class="number">48</span>-<span class="number">4463</span>-aff<span class="number">8</span>-b<span class="number">0</span>dbd<span class="number">27</span>d<span class="number">3</span>b<span class="number">7</span>d&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -267,7 +316,7 @@
 <p>信道三：数据信号</p>
 <p>设置一下，然后直接分析得到答案。（ps:也可以把数据信号的数据导出成二进制，然后转成字符。）</p>
 <p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/seleae-flag.png" alt="seleae——flag"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;12071397-19d1-48e6-be8c-784b89a95e07&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">flag</span>&#123;<span class="number">12071397</span>-<span class="number">19</span>d<span class="number">1</span>-<span class="number">48</span>e<span class="number">6</span>-be<span class="number">8</span>c-<span class="number">784</span>b<span class="number">89</span>a<span class="number">95</span>e<span class="number">07</span>&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="0x03-24c"><a href="#0x03-24c" class="headerlink" title="0x03 24c"></a>0x03 24c</h2><p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/24c.png" alt="24c"></p>
 <p>文件地址：<a target="_blank" rel="noopener" href="https://github.com/ch3cke/challenges/raw/master/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%9B%BD%E8%B5%9B/24c_ee1ec3b00fd7a89be0db18fb299cf2ad.zip">点击下载</a></p>
@@ -276,13 +325,13 @@
 <p>但是存在一个坑点就是，这个东西需要你稍微看懂一点这个语法的意思，例如 <code>Setup Write to [&#39;160&#39;] + ACK </code> 意思是写入数据，ACK表述信号收到（可能不是那么标准），’ ’+ACK表示写入的地址，后面的是写入的数据，翻译：向设备的0x20(‘ ‘的ascill为0x20)处写入数据</p>
 <p>然后，在信号结束的地方，有一个 <code>Setup Write to [&#39;160&#39;] +ACK \n \t+ACK </code> ,表明是把0x09、0x10位置的数据修改为ac，数据下标是从0开始的，一开始不小心疏忽了，一直错误。  </p>
 <p>至于我是怎么理解的，<a target="_blank" rel="noopener" href="https://tieba.baidu.com/p/4244941563?red_tag=1385763725">请看这个连接</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;c46dac10-e9b5-4d90-a883-41cf163bdf4e&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">flag</span>&#123;c<span class="number">46</span>dac<span class="number">10</span>-e<span class="number">9</span>b<span class="number">5</span>-<span class="number">4</span>d<span class="number">90</span>-a<span class="number">883</span>-<span class="number">41</span>cf<span class="number">163</span>bdf<span class="number">4</span>e&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="0x03-usbasp"><a href="#0x03-usbasp" class="headerlink" title="0x03 * usbasp"></a>0x03 * usbasp</h2><p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/usbasp.png"></p>
 <p>又是这个题目，还是这个软件，一样的打开方式，分析数据，发现采用的又变回SPI协议了，这个题目说起来。。。。很简单的，但是没有想到点上。这个信号不同的就是他的数据输入有点特别，所以我们在分析的时候需要做一点小小的设置。</p>
 <p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/usbasp-a.png" alt="usbasp-a"></p>
 <p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/usbasp-c.png" alt="usbasp-c"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;85b084c6-42e6-495c-87b4-46dfb1df58a0&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">flag</span>&#123;<span class="number">85</span>b<span class="number">084</span>c<span class="number">6</span>-<span class="number">42</span>e<span class="number">6</span>-<span class="number">495</span>c-<span class="number">87</span>b<span class="number">4</span>-<span class="number">46</span>dfb<span class="number">1</span>df<span class="number">58</span>a<span class="number">0</span>&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="0x04-easyGo"><a href="#0x04-easyGo" class="headerlink" title="0x04 easyGo"></a>0x04 easyGo</h2><p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/easyGo.png"></p>
 <p>文件地址：<a target="_blank" rel="noopener" href="https://github.com/ch3cke/challenges/raw/master/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%9B%BD%E8%B5%9B/easyGo_ec2819a048a8e908a90c3f5b9f8cd985.zip">点击下载</a></p>
@@ -293,7 +342,7 @@
 <p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/easyGo-c.png" alt="easyGo-c"></p>
 <p>注意到有个比较，以前学过go语言,在这个题目里，”_”可以识别成“.” ,大部分都是包的调用，很好理解 。发现比较的两个值都在栈里，所以简单了，只要用pwndbg调试,在比较前下个断点，在栈面可以找到flag。</p>
 <p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/easyGo-d.png" alt="easyGO-d"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;92094daf-33c9-431e-a85a-8bfbd5df98ad&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">flag</span>&#123;<span class="number">92094</span>daf-<span class="number">33</span>c<span class="number">9</span>-<span class="number">431</span>e-a<span class="number">85</span>a-<span class="number">8</span>bfbd<span class="number">5</span>df<span class="number">98</span>ad&#125;</span><br></pre></td></tr></table></figure>
 
 <h2 id="0x05-JustSoso"><a href="#0x05-JustSoso" class="headerlink" title="0x05 JustSoso"></a>0x05 JustSoso</h2><p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/Justsoso.png" alt="Justsoso"></p>
 <p>考察知识点：<a target="_blank" rel="noopener" href="https://www.freebuf.com/column/148886.html">php伪协议</a>、<a target="_blank" rel="noopener" href="https://www.freebuf.com/articles/web/167721.html">反序列化</a></p>
@@ -311,7 +360,7 @@
 
 <p>利用php中的”&amp;”,，绕过随机数</p>
 <p>利用”///“,<a target="_blank" rel="noopener" href="http://www.am0s.com/functions/406.html">绕过parse_url</a></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">flag&#123;38b3ff3b-3ac0-4a8e-a344-b75b0f23bb68&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">flag</span>&#123;<span class="number">38</span>b<span class="number">3</span>ff<span class="number">3</span>b-<span class="number">3</span>ac<span class="number">0</span>-<span class="number">4</span>a<span class="number">8</span>e-a<span class="number">344</span>-b<span class="number">75</span>b<span class="number">0</span>f<span class="number">23</span>bb<span class="number">68</span>&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -370,6 +419,7 @@
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -484,6 +534,26 @@
 </div>
 
         
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="Total Visitors">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="Total Views">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
 
 
 
@@ -605,6 +675,10 @@
 
 
 
+  
+<script src="/js/local-search.js"></script>
+
+
 
 
 
@@ -620,9 +694,67 @@
 
   
 
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'ycr3H7xjY3xBg7O8ucf8KcEq-gzGzoHsz',
+      appKey     : 'Tjp5OxQgxsp3jIwOxzVuNoox',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'en' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
   
 
   
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'ycr3H7xjY3xBg7O8ucf8KcEq-gzGzoHsz',
+      appKey     : 'Tjp5OxQgxsp3jIwOxzVuNoox',
+      placeholder: "Just go go",
+      avatar     : 'mm',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : 'en' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : true,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
 
   
 
