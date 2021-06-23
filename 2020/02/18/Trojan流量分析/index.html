@@ -148,7 +148,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">2</span></a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -158,7 +158,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">7</span></a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives<span class="badge">9</span></a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -308,19 +308,15 @@
       
         <p>﻿## 原理解析</p>
 <p><img src="https://img-blog.csdnimg.cn/20200218223743627.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="Trojan原理"><br>如图所示，Trojan工作在443端口，处理来自外界的HTTPS请求，如果是合法的Trojan请求，那么为该请求提供服务，否则就将该流量转发给web。服务器Nginx，由Nginx为其提供服务。基于这个工作工程可以知道，Trojan的一切表现均与Nginx一致，不会引入额外特征，从而达到无法识别的效果。当然，为了防止恶意探测，我们需要将80端口的流量全部重定向到443端口，并且服务器只暴露80和443端口，这样可以使得服务器与常见的Web服务器表现一致。</p>
-<p>当Trojan客户端连接到服务器时，它首先执行真正的TLS握手。如果握手成功，则所有后续流量都将受到TLS的保护；</p>
-<span id="more"></span>
+<p>当Trojan客户端连接到服务器时，它首先执行真正的TLS握手。如果握手成功，则所有后续流量都将受到TLS的保护；<br><span id="more"></span></p>
 <h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p><strong>本机IP</strong>: 192.168.31.176</p>
 <p><strong>服务器IP</strong>: 91.220.202.97<br><img src="https://img-blog.csdnimg.cn/20200218224249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="TCP与TLS握手"><br>TCP握手包序号：73，74，75</p>
 <p>TLS握手：76，77，78，79，80，81，82，83</p>
 <p>然后，客户端发送以下结构（TLS加密之后的）：</p>
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">+-----------------------+</span>---------<span class="code">+----------------+</span>---------<span class="code">+----------+</span></span><br><span class="line"><span class="section">| hex(SHA224(password)) |  CRLF   | Trojan Request |  CRLF   | Payload  |</span></span><br><span class="line"><span class="section">+-----------------------+---------+----------------+---------+----------+</span></span><br><span class="line"><span class="section">|          56           | X&#x27;0D0A&#x27; |    Variable    | X&#x27;0D0A&#x27; | Variable |</span></span><br><span class="line"><span class="section">+-----------------------+---------+----------------+---------+----------+</span></span><br></pre></td></tr></table></figure>
-
 <p>当Trojan 请求是类似于如下SOCKS5的请求：</p>
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">+-----+</span>------<span class="code">+----------+</span>----------+</span><br><span class="line"><span class="section">| CMD | ATYP | DST.ADDR | DST.PORT |</span></span><br><span class="line"><span class="section">+-----+------+----------+----------+</span></span><br><span class="line"><span class="section">|  1  |  1   | Variable |    2     |</span></span><br><span class="line"><span class="section">+-----+------+----------+----------+</span></span><br><span class="line"></span><br><span class="line">o  CMD</span><br><span class="line"><span class="code">        o  CONNECT X&#x27;01&#x27;</span></span><br><span class="line"><span class="code">        o  UDP ：X&#x27;03&#x27;</span></span><br><span class="line">o  ATYP </span><br><span class="line"><span class="code">        o  IP V4 : X&#x27;01&#x27;</span></span><br><span class="line"><span class="code">        o  域名: X&#x27;03&#x27;</span></span><br><span class="line"><span class="code">        o  IP V6 : X&#x27;04&#x27;</span></span><br><span class="line">o  DST.ADDR 所需的目标地址</span><br><span class="line">o  DST.PORT 目标端口</span><br></pre></td></tr></table></figure>
-
 <h2 id="UDP模式"><a href="#UDP模式" class="headerlink" title="UDP模式"></a>UDP模式</h2><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">+------+</span>----------<span class="code">+----------+</span>--------<span class="code">+---------+</span>----------+</span><br><span class="line"><span class="section">| ATYP | DST.ADDR | DST.PORT | Length |  CRLF   | Payload  |</span></span><br><span class="line"><span class="section">+------+----------+----------+--------+---------+----------+</span></span><br><span class="line"><span class="section">|  1   | Variable |    2     |   2    | X&#x27;0D0A&#x27; | Variable |</span></span><br><span class="line"><span class="section">+------+----------+----------+--------+---------+----------+</span></span><br></pre></td></tr></table></figure>
-
 <p>服务器收到第一个数据包时，将检查哈希密码是否正确以及Trojan请求是否有效。如果不是，则将该协议视为非Trojan请求。</p>
 <p>请注意，第一个数据包将附加有效负载。这避免了长度模式检测，并可能减少要发送的数据包数量。</p>
 <p>如果请求有效，则Trojan服务器将连接到DST.ADDR和DST.PORT字段指示的目标服务器，并在服务器和Trojan客户端之间打开通道。</p>
@@ -428,7 +424,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -439,7 +435,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -484,13 +480,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">11k</span>
+    <span title="Symbols count total">24k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">10 mins.</span>
+    <span title="Reading time total">21 mins.</span>
 </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
         
@@ -661,6 +657,8 @@
 
   
 
+  
+
 
 <script>
 NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
@@ -691,6 +689,8 @@ NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
   }, window.Valine);
 });
 </script>
+
+  
 
   
 
