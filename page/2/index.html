@@ -294,8 +294,7 @@
       
           <p>﻿## 原理解析</p>
 <p><img src="https://img-blog.csdnimg.cn/20200218223743627.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="Trojan原理"><br>如图所示，Trojan工作在443端口，处理来自外界的HTTPS请求，如果是合法的Trojan请求，那么为该请求提供服务，否则就将该流量转发给web。服务器Nginx，由Nginx为其提供服务。基于这个工作工程可以知道，Trojan的一切表现均与Nginx一致，不会引入额外特征，从而达到无法识别的效果。当然，为了防止恶意探测，我们需要将80端口的流量全部重定向到443端口，并且服务器只暴露80和443端口，这样可以使得服务器与常见的Web服务器表现一致。</p>
-<p>当Trojan客户端连接到服务器时，它首先执行真正的TLS握手。如果握手成功，则所有后续流量都将受到TLS的保护；<br><span id="more"></span></p>
-<h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p><strong>本机IP</strong>: 192.168.31.176</p>
+<p>当Trojan客户端连接到服务器时，它首先执行真正的TLS握手。如果握手成功，则所有后续流量都将受到TLS的保护；<br>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/02/18/Trojan%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/#more" rel="contents">
@@ -412,9 +411,6 @@
 
       
           <p>Author: <a target="_blank" rel="noopener" href="https://ch3cke.github.io/">ch3cke</a></p>
-<span id="more"></span>
-<h2 id="0x00-签到题"><a href="#0x00-签到题" class="headerlink" title="0x00 签到题"></a>0x00 签到题</h2><p><img src="https://raw.githubusercontent.com/ch3cke/images/master/全国大学生信息安全竞赛12/签到题目.png" alt="签到"></p>
-<p>文件连接：<a target="_blank" rel="noopener" href="https://github.com/ch3cke/challenges/raw/master/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%9B%BD%E8%B5%9B/qiandao_32ac2a19cef66c300e29fafac57b9e1a%20(1">点击下载</a>.zip)</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2019/04/23/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B-Writeup/#more" rel="contents">
@@ -521,10 +517,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。<br><span id="more"></span></p>
-<h2 id="发现目标主机"><a href="#发现目标主机" class="headerlink" title="发现目标主机"></a>发现目标主机</h2><p>利用扫描工具nmap扫描目标网段，寻找存活的目标主机。我的NAT模式网段在192.168.43.1这个网段上，可以用命令：</p>
-<p><code>nmap 192.168.43.0/24</code></p>
-<p>扫描目标端内所有的存活主机</p>
+          <p>Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。<br>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/12/08/Dina%E6%B8%97%E9%80%8F/#more" rel="contents">
@@ -635,14 +628,89 @@
 <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>PWN,Reverse：偏重对汇编，逆向的理解，逆向更多要求对于各种代码的了解，会常见开发，注重算法的理解，数据结构和算法一定要学好；PWN要求对于计算机系统的了解，对于基础的数据结构-栈堆-以及Linux/widows下的程序调用比较熟悉。</p>
 <p>crypto：偏重对数学，算法的深入学习，同时也需要对常见密码有所了解-AES/DES等；</p>
 <p>Web：需要对各种web漏洞了解，明白其形成原因和利用方式；了解计算机网络、网站搭建、会用常见的网站框架，同时需要大量的练习；</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/12/08/CTF%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+<p>Misc：则更为复杂，所有与计算机安全挑战有关的都算在其中，所学很杂，积累和刷题很重要，常见有流量分析/隐写等；</p>
+<p>Mobile:安卓逆向，要去了解安卓的基本架构；</p>
+<h2 id="常规做法"><a href="#常规做法" class="headerlink" title="常规做法"></a>常规做法</h2><p>　　A方向：PWN+Reverse+crypto,随机搭配；</p>
+<p>　　B方向：Web+Misc组合；</p>
+<h2 id="都要学的内容："><a href="#都要学的内容：" class="headerlink" title="都要学的内容："></a>都要学的内容：</h2><ul>
+<li>Linux基础</li>
+<li>计算机组成原理</li>
+<li>操作系统原理</li>
+<li>网络协议分析</li>
+<li>数据结构</li>
+<li>算法</li>
+</ul>
+<h2 id="A方向"><a href="#A方向" class="headerlink" title="A方向"></a>A方向</h2><p>　　　　IDA工具使用（f5插件），逆向工程，密码学，缓冲区溢出等</p>
+<p>​         书籍推荐：</p>
+<ul>
+<li><p>《加密与解密（第四版）》；</p>
+</li>
+<li><p>《IDA Pro权威指南》；</p>
+</li>
+<li><p>《逆向工程权威指南》（字典工具书）；</p>
+</li>
+<li><p>《自己动手写操作系统》；</p>
+</li>
+<li><p>《算法导论》</p>
+</li>
+<li><p>《汇编语言》</p>
+</li>
+<li><p>《黑客攻防宝典，系统实战篇》；</p>
+</li>
+<li><p>《程序员的自我修养—链接、装载与库》</p>
+<p>网站推荐： </p>
+<p>www.pediy.com</p>
+<p>www.52pojie.cn</p>
+<p>www.pwnable.kr</p>
+<p>www.pwnable.tw</p>
+</li>
+</ul>
+<h2 id="B方向"><a href="#B方向" class="headerlink" title="B方向"></a>B方向</h2><p>　　　　网络安全，内网渗透，数据库安全。</p>
+<p>　　　　书籍推荐：</p>
+<ul>
+<li><p>《Web应用安全权威指南》</p>
+</li>
+<li><p>《web前端黑客技术揭秘》</p>
+</li>
+<li><p>《黑客秘籍-渗透测试实用指南》</p>
+</li>
+<li><p>《黑客攻防技术宝典Web实战篇》</p>
+</li>
+<li><p>《代码审计：企业级Web代码安全架构》</p>
+</li>
+<li><p>《SQL注入攻击与防御》</p>
+<p>网站推荐：</p>
+<p><a target="_blank" rel="noopener" href="http://www.dvwa.co.uk/">dvwa本地靶场</a>（自己在本地搭建）</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/Audi-1/sqli-labs">SQLilab本地靶场</a>（自己在本地搭建）</p>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1eRIB3Se">webug</a>（本地搭建）</p>
+<p><a target="_blank" rel="noopener" href="http://hackinglab.cn/">http://hackinglab.cn/</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.gameofhacks.com/">http://www.gameofhacks.com/</a></p>
+<p><a target="_blank" rel="noopener" href="http://1111.segmentfault.com/">http://1111.segmentfault.com/</a> 光棍节程序员闯关秀</p>
+<p><a target="_blank" rel="noopener" href="http://monyer.com/game/game1/">http://monyer.com/game/game1/</a>梦之光芒的小游戏</p>
+<p><a target="_blank" rel="noopener" href="http://www.fj543.com/hack/">http://www.fj543.com/hack/</a> 黑客丛林之旅</p>
+<p><a target="_blank" rel="noopener" href="http://hackgame.blackbap.org/">http://hackgame.blackbap.org/</a> 习科黑客游戏</p>
+<p><a target="_blank" rel="noopener" href="http://www.helloisa.com/test/">http://www.helloisa.com/test/</a> ISA闯关游戏</p>
+<p><a target="_blank" rel="noopener" href="http://hkyx.myhack58.com/">http://hkyx.myhack58.com/</a> 红客闯关游戏</p>
+<p><a target="_blank" rel="noopener" href="http://hackit.sinaapp.com/">http://hackit.sinaapp.com/</a> hackit游戏</p>
+</li>
+</ul>
+<h2 id="CTF综合平台"><a href="#CTF综合平台" class="headerlink" title="CTF综合平台"></a>CTF综合平台</h2><p>学校自己的系统（10.222.2.235/10.222.2.236）</p>
+<p><a target="_blank" rel="noopener" href="http://www.ichunqiu.com/">http://www.ichunqiu.com/</a>  i春秋</p>
+<p><a target="_blank" rel="noopener" href="http://www.shiyanbar.com">http://www.shiyanbar.com</a> 实验吧</p>
+<p><a target="_blank" rel="noopener" href="https://ctf.bugku.com/">https://ctf.bugku.com/</a> bugku平台</p>
+<p><a target="_blank" rel="noopener" href="http://oj.xctf.org.cn/">http://oj.xctf.org.cn/</a> XCTF_OJ练习平台 （自己去找吧）</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>　　CTF比赛一般都是使用网络完全常用工具，比如burp、IDA等，但是会与很多大家不常见的工具：</p>
+<p>　　　　<a target="_blank" rel="noopener" href="https://hithub.com/truongkma/ctf-tools">https://hithub.com/truongkma/ctf-tools</a></p>
+<p>　　　　<a target="_blank" rel="noopener" href="https://tool.bugku.com/">https://tool.bugku.com/</a></p>
+<h2 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h2><ul>
+<li>​        <a target="_blank" rel="noopener" href="https://ctftime.org/国际比赛">https://ctftime.org/国际比赛</a></li>
+<li>​        <a target="_blank" rel="noopener" href="http://www.xctf.org.cn/国内比赛">http://www.xctf.org.cn/国内比赛</a></li>
+<li>​        <a target="_blank" rel="noopener" href="http://www.ichunqiu.com/">http://www.ichunqiu.com/</a>  i春秋（赛宁）</li>
+</ul>
+<p>【注】：</p>
+<p>1、writeup指CTF比赛结题思路</p>
+<h1 id="信心比黄金更重要"><a href="#信心比黄金更重要" class="headerlink" title="信心比黄金更重要"></a><strong>信心比黄金更重要</strong></h1><p>禁止转载！！！</p>
+
       
     </div>
 
@@ -750,13 +818,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="初赛"><a href="#初赛" class="headerlink" title="初赛"></a>初赛</h2><p>2018年10月20日<br><span id="more"></span><br>这次比赛作为华师代表队Check参与比赛，深深感觉自己的知识水平真的不够，题目做的太少了，还是以后要加强学习，学的太少了。题目都是web题目，web好久没做了，有点手生。比赛和CTF不同，主要是渗透测试。</p>
-<ul>
-<li>初赛题目四个，分别是两个内网题目，两个外网题目，外网平台分别是一个网上的APP下载平台，和一个Apache服务器。</li>
-<li>APP下载平台利用方式<br>1.利用目录扫描工具，扫描目录，获取到后台目录admin和robots.txt,其中robots.txt存在一个flag，提交即可。<br>2.访问后台admin页面，可以看见登录页面。（偷偷用扫描页面扫过）没有其他漏洞，猜想存在弱口令秘密，试了几个，发现不行，想到爆破。<br>3.存在有一个安全码，可能是防止爆破，但是没什么卵用，查看页面源码，页面底部就有安全码，直接输入。bp一把梭，抓包导入字典爆破。得到密码：admin123，进入后台，后台底部就有一个flag。<br>4.有小tips，这个网站可以访问PHP页面，所以没必要上传什么木马了，直接插入就行了，然后菜刀一连，getshell，在桌面找到一个flag，提交。<br>5.还有一个falg，藏得页面有点深，感谢队友的仔细搜索。hhh</li>
-<li>Apache服务器没有黑进去，有点尴尬。。。。<br>1.说一下找到的一个flag，实在目录下的，直接访问flag.txt,运气不错！hhh初赛简单的很，哈哈哈，感谢大佬手下留情。<br>2.因为后来对Apache服务器不熟悉，一开始方向错了，经验不够，后来时间不够，实在没进去。555555</li>
-</ul>
-<h2 id="决赛"><a href="#决赛" class="headerlink" title="决赛"></a>决赛</h2><p>2018年10月29日<br>线下赛真的菜，没办法，打的少，被虐了，呜呜呜<br>平台不熟悉,培训没去，也是坑点<br>一个获取的flag是利用ftp下载的flag，查看就行。因为人手不够没写exp，效率不够，得分少得可怜，惨兮兮。。。。</p>
+          <h2 id="初赛"><a href="#初赛" class="headerlink" title="初赛"></a>初赛</h2><p>2018年10月20日<br>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/10/30/%E7%9C%81%E8%B5%9B%E6%80%BB%E7%BB%93/#more" rel="contents">
@@ -906,7 +968,7 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">82k</span>
+    <span title="Symbols count total">83k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
