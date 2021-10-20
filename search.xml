@@ -602,9 +602,8 @@
   <entry>
     <title>Trojan流量分析</title>
     <url>/2020/02/18/Trojan%E6%B5%81%E9%87%8F%E5%88%86%E6%9E%90/</url>
-    <content><![CDATA[<p>﻿## 原理解析</p>
-<p><img src="https://img-blog.csdnimg.cn/20200218223743627.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="Trojan原理"><br>如图所示，Trojan工作在443端口，处理来自外界的HTTPS请求，如果是合法的Trojan请求，那么为该请求提供服务，否则就将该流量转发给web。服务器Nginx，由Nginx为其提供服务。基于这个工作工程可以知道，Trojan的一切表现均与Nginx一致，不会引入额外特征，从而达到无法识别的效果。当然，为了防止恶意探测，我们需要将80端口的流量全部重定向到443端口，并且服务器只暴露80和443端口，这样可以使得服务器与常见的Web服务器表现一致。</p>
-<p>当Trojan客户端连接到服务器时，它首先执行真正的TLS握手。如果握手成功，则所有后续流量都将受到TLS的保护；<br><span id="more"></span></p>
+    <content><![CDATA[<h2 id="原理解析"><a href="#原理解析" class="headerlink" title="原理解析"></a>原理解析</h2><p><img src="https://img-blog.csdnimg.cn/20200218223743627.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="Trojan原理"><br>如图所示，Trojan工作在443端口，处理来自外界的HTTPS请求，如果是合法的Trojan请求，那么为该请求提供服务，否则就将该流量转发给web。服务器Nginx，由Nginx为其提供服务。基于这个工作工程可以知道，Trojan的一切表现均与Nginx一致，不会引入额外特征，从而达到无法识别的效果。当然，为了防止恶意探测，我们需要将80端口的流量全部重定向到443端口，并且服务器只暴露80和443端口，这样可以使得服务器与常见的Web服务器表现一致。</p>
+<p>当Trojan客户端连接到服务器时，它首先执行真正的TLS握手。如果握手成功，则所有后续流量都将受到TLS的保护；</p>
 <h2 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h2><p><strong>本机IP</strong>: 192.168.31.176</p>
 <p><strong>服务器IP</strong>: 91.220.202.97<br><img src="https://img-blog.csdnimg.cn/20200218224249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="TCP与TLS握手"><br>TCP握手包序号：73，74，75</p>
 <p>TLS握手：76，77，78，79，80，81，82，83</p>
