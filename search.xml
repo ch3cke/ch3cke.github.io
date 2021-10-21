@@ -698,7 +698,8 @@
   <entry>
     <title>省赛总结</title>
     <url>/2018/10/30/%E7%9C%81%E8%B5%9B%E6%80%BB%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="初赛"><a href="#初赛" class="headerlink" title="初赛"></a>初赛</h2><p>2018年10月20日<br><span id="more"></span><br>这次比赛作为华师代表队Check参与比赛，深深感觉自己的知识水平真的不够，题目做的太少了，还是以后要加强学习，学的太少了。题目都是web题目，web好久没做了，有点手生。比赛和CTF不同，主要是渗透测试。</p>
+    <content><![CDATA[<h2 id="初赛"><a href="#初赛" class="headerlink" title="初赛"></a>初赛</h2><p>2018年10月20日</p>
+<p>这次比赛作为华师代表队Check参与比赛，深深感觉自己的知识水平真的不够，题目做的太少了，还是以后要加强学习，学的太少了。题目都是web题目，web好久没做了，有点手生。比赛和CTF不同，主要是渗透测试。</p>
 <ul>
 <li>初赛题目四个，分别是两个内网题目，两个外网题目，外网平台分别是一个网上的APP下载平台，和一个Apache服务器。</li>
 <li>APP下载平台利用方式<br>1.利用目录扫描工具，扫描目录，获取到后台目录admin和robots.txt,其中robots.txt存在一个flag，提交即可。<br>2.访问后台admin页面，可以看见登录页面。（偷偷用扫描页面扫过）没有其他漏洞，猜想存在弱口令秘密，试了几个，发现不行，想到爆破。<br>3.存在有一个安全码，可能是防止爆破，但是没什么卵用，查看页面源码，页面底部就有安全码，直接输入。bp一把梭，抓包导入字典爆破。得到密码：admin123，进入后台，后台底部就有一个flag。<br>4.有小tips，这个网站可以访问PHP页面，所以没必要上传什么木马了，直接插入就行了，然后菜刀一连，getshell，在桌面找到一个flag，提交。<br>5.还有一个falg，藏得页面有点深，感谢队友的仔细搜索。hhh</li>
@@ -713,11 +714,8 @@
 </ol>
 <h2 id="吐槽："><a href="#吐槽：" class="headerlink" title="吐槽："></a>吐槽：</h2><p>不能联网，这点很服<br>为啥自己的服务器还要自己黑进去</p>
 <h1 id="最后，自己太菜了，以后加油！！！"><a href="#最后，自己太菜了，以后加油！！！" class="headerlink" title="最后，自己太菜了，以后加油！！！"></a>最后，自己太菜了，以后加油！！！</h1><h1 id="好好学习"><a href="#好好学习" class="headerlink" title="好好学习"></a>好好学习</h1>]]></content>
-      <categories>
-        <category>总结</category>
-      </categories>
       <tags>
-        <tag>总结</tag>
+        <tag>info</tag>
       </tags>
   </entry>
   <entry>
