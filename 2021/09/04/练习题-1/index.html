@@ -21,13 +21,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"blog.ch3cke.xyz","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"ch3cke.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":"mac"},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"valine","storage":true,"lazyload":false,"nav":null,"activeClass":"valine"},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="几天做了几道逆向题，简单记录一下解题思路和过程 Petition程序链接这个题目来自某次比赛的一个逆向题，比较有意思的是这个题目存在一些小小的问题，存在一些小小的反调试，题目中的数据操作大部分是异或操作，逆向起来直接反汇编无法分析程序，只能看汇编。首先用IDA打开程序： 分析这个程序，可得这个程序的检验的方式是逐字符检验，一旦有某个字符错误，就会直接推出，根据题目的难度和数据操作的方式，现有两个解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="练习题(1)">
-<meta property="og:url" content="https://blog.ch3cke.xyz/2021/09/04/%E7%BB%83%E4%B9%A0%E9%A2%98-1/index.html">
+<meta property="og:url" content="https://ch3cke.github.io/2021/09/04/%E7%BB%83%E4%B9%A0%E9%A2%98-1/index.html">
 <meta property="og:site_name" content="ch3cke的小站">
 <meta property="og:description" content="几天做了几道逆向题，简单记录一下解题思路和过程 Petition程序链接这个题目来自某次比赛的一个逆向题，比较有意思的是这个题目存在一些小小的问题，存在一些小小的反调试，题目中的数据操作大部分是异或操作，逆向起来直接反汇编无法分析程序，只能看汇编。首先用IDA打开程序： 分析这个程序，可得这个程序的检验的方式是逐字符检验，一旦有某个字符错误，就会直接推出，根据题目的难度和数据操作的方式，现有两个解">
 <meta property="og:locale" content="en_US">
@@ -56,7 +56,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.loli.net/2021/09/04/KDo7S6Rw2Vfvpx1.png">
 
-<link rel="canonical" href="https://blog.ch3cke.xyz/2021/09/04/%E7%BB%83%E4%B9%A0%E9%A2%98-1/">
+<link rel="canonical" href="https://ch3cke.github.io/2021/09/04/%E7%BB%83%E4%B9%A0%E9%A2%98-1/">
 
 
 <script id="page-configurations">
@@ -235,7 +235,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="https://blog.ch3cke.xyz/2021/09/04/%E7%BB%83%E4%B9%A0%E9%A2%98-1/">
+    <link itemprop="mainEntityOfPage" href="https://ch3cke.github.io/2021/09/04/%E7%BB%83%E4%B9%A0%E9%A2%98-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
