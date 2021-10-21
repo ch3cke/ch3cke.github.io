@@ -33,9 +33,9 @@
     
     <category term="CTF" scheme="https://blog.ch3cke.xyz/tags/CTF/"/>
     
-    <category term="PWN" scheme="https://blog.ch3cke.xyz/tags/PWN/"/>
-    
     <category term="hackthebox" scheme="https://blog.ch3cke.xyz/tags/hackthebox/"/>
+    
+    <category term="PWN" scheme="https://blog.ch3cke.xyz/tags/PWN/"/>
     
     <category term="UAF" scheme="https://blog.ch3cke.xyz/tags/UAF/"/>
     
@@ -60,11 +60,11 @@
     
     <category term="CTF" scheme="https://blog.ch3cke.xyz/tags/CTF/"/>
     
-    <category term="hackthebox" scheme="https://blog.ch3cke.xyz/tags/hackthebox/"/>
-    
     <category term="pwn" scheme="https://blog.ch3cke.xyz/tags/pwn/"/>
     
     <category term="arm" scheme="https://blog.ch3cke.xyz/tags/arm/"/>
+    
+    <category term="hackthebox" scheme="https://blog.ch3cke.xyz/tags/hackthebox/"/>
     
   </entry>
   
