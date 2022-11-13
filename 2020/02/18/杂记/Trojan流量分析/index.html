@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200218224715547.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200218224747459.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70">
 <meta property="article:published_time" content="2020-02-18T15:20:52.000Z">
-<meta property="article:modified_time" content="2022-11-13T15:23:15.285Z">
+<meta property="article:modified_time" content="2022-11-13T15:43:12.427Z">
 <meta property="article:author" content="ch3cke">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://img-blog.csdnimg.cn/20200218223743627.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70">
@@ -97,9 +97,7 @@
   </style>
 </noscript>
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="/custom_css_source.css">
-<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="ch3cke的小站" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="ch3cke的小站" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -257,7 +255,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-13 23:23:15" itemprop="dateModified" datetime="2022-11-13T23:23:15+08:00">2022-11-13</time>
+                <time title="Modified: 2022-11-13 23:43:12" itemprop="dateModified" datetime="2022-11-13T23:43:12+08:00">2022-11-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -321,6 +319,7 @@
 <p><strong>服务器IP</strong>: 91.220.202.97<br><img src="https://img-blog.csdnimg.cn/20200218224249153.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2JsYXRlb3I=,size_16,color_FFFFFF,t_70" alt="TCP与TLS握手"><br>TCP握手包序号：73，74，75</p>
 <p>TLS握手：76，77，78，79，80，81，82，83</p>
 <p>然后，客户端发送以下结构（TLS加密之后的）：</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -331,19 +330,20 @@
 <th>Payload</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>56</td>
 <td>X’0D0A’</td>
 <td>Variable</td>
 <td>X’0D0A’</td>
 <td>Variable</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
+</div>
 <p>当Trojan 请求是类似于如下SOCKS5的请求：</p>
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">+-----+</span>------<span class="code">+----------+</span>----------+</span><br><span class="line"><span class="section">| CMD | ATYP | DST.ADDR | DST.PORT |</span></span><br><span class="line"><span class="section">+-----+------+----------+----------+</span></span><br><span class="line"><span class="section">|  1  |  1   | Variable |    2     |</span></span><br><span class="line"><span class="section">+-----+------+----------+----------+</span></span><br><span class="line"></span><br><span class="line">o  CMD</span><br><span class="line"><span class="code">        o  CONNECT X&#x27;01&#x27;</span></span><br><span class="line"><span class="code">        o  UDP ：X&#x27;03&#x27;</span></span><br><span class="line">o  ATYP </span><br><span class="line"><span class="code">        o  IP V4 : X&#x27;01&#x27;</span></span><br><span class="line"><span class="code">        o  域名: X&#x27;03&#x27;</span></span><br><span class="line"><span class="code">        o  IP V6 : X&#x27;04&#x27;</span></span><br><span class="line">o  DST.ADDR 所需的目标地址</span><br><span class="line">o  DST.PORT 目标端口</span><br></pre></td></tr></table></figure>
-
 <h2 id="UDP模式"><a href="#UDP模式" class="headerlink" title="UDP模式"></a>UDP模式</h2><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">+------+</span>----------<span class="code">+----------+</span>--------<span class="code">+---------+</span>----------+</span><br><span class="line"><span class="section">| ATYP | DST.ADDR | DST.PORT | Length |  CRLF   | Payload  |</span></span><br><span class="line"><span class="section">+------+----------+----------+--------+---------+----------+</span></span><br><span class="line"><span class="section">|  1   | Variable |    2     |   2    | X&#x27;0D0A&#x27; | Variable |</span></span><br><span class="line"><span class="section">+------+----------+----------+--------+---------+----------+</span></span><br></pre></td></tr></table></figure>
-
 <p>服务器收到第一个数据包时，将检查哈希密码是否正确以及Trojan请求是否有效。如果不是，则将该协议视为非Trojan请求。</p>
 <p>请注意，第一个数据包将附加有效负载。这避免了长度模式检测，并可能减少要发送的数据包数量。</p>
 <p>如果请求有效，则Trojan服务器将连接到DST.ADDR和DST.PORT字段指示的目标服务器，并在服务器和Trojan客户端之间打开通道。</p>
@@ -507,13 +507,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">130k</span>
+    <span title="Symbols count total">129k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">1:58</span>
+    <span title="Reading time total">1:57</span>
 </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
         

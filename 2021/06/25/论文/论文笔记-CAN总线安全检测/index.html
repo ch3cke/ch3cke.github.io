@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://i.loli.net/2021/06/25/tzDb91rMNOSnQg5.png">
 <meta property="og:image" content="https://i.loli.net/2021/06/25/PH2Iouyb5LiSCkR.png">
 <meta property="article:published_time" content="2021-06-25T04:26:53.000Z">
-<meta property="article:modified_time" content="2022-11-13T15:23:15.285Z">
+<meta property="article:modified_time" content="2022-11-13T15:43:12.427Z">
 <meta property="article:author" content="ch3cke">
 <meta property="article:tag" content="论文阅读">
 <meta property="article:tag" content="CAN总线">
@@ -99,9 +99,7 @@
   </style>
 </noscript>
 
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="/custom_css_source.css">
-<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="ch3cke的小站" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="ch3cke的小站" type="application/atom+xml">
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -259,7 +257,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-13 23:23:15" itemprop="dateModified" datetime="2022-11-13T23:23:15+08:00">2022-11-13</time>
+                <time title="Modified: 2022-11-13 23:43:12" itemprop="dateModified" datetime="2022-11-13T23:43:12+08:00">2022-11-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -352,9 +350,10 @@
 <p>CAN数据包，特别是那些更重要的数据包，通常以非常规则、频繁的周期、进行广播。因此，CAN  id重复出现的频率可以提供一种检测某些攻击的方法。这里关注的攻击模式(刷新和包注入)可能会强制临时改变相关CAN包、、的广播频率。在刷新攻击中，来自ECU的数据包在刷新时不会广播，从而导致相关CAN  id的暂时减少。在注入攻击中，某些CAN  id的广播频率会增加，因为攻击要求以足够高的速率广播虚假数据包，以淹没相关的合法广播。另外，CAN仲裁过程(CAN  ID值越低，广播优先级越高)可能会导致某些CAN ID的广播槽丢失给攻击中使用的优先级较高的占主导地位的CAN ID。</p>
 <ul>
 <li>重新刷新攻击：某些数据包不会出现，相关的CAN ID在一定时间窗口内不会出现</li>
-<li>注入攻击： 某些数据包在一定的时间窗口内会出现高频率传输，攻击要求以足够高的速率广播虚假数据包，以淹没相关的合法广播</li>
+<li><p>注入攻击： 某些数据包在一定的时间窗口内会出现高频率传输，攻击要求以足够高的速率广播虚假数据包，以淹没相关的合法广播</p>
+<h3 id="时间窗口的方法"><a href="#时间窗口的方法" class="headerlink" title="时间窗口的方法"></a>时间窗口的方法</h3></li>
 </ul>
-<h3 id="时间窗口的方法"><a href="#时间窗口的方法" class="headerlink" title="时间窗口的方法"></a>时间窗口的方法</h3><p>时间定义窗口方法将数据处理为离散窗口。将计算出的指标和随后的决策保持在窗口的本地，可以减少数据中反映的任何长期系统更改的影响。有一些窗口方法可以用于数据包定时异常检测。一种选择是处理窗口以获得度量，然后应用这些度量对下一个广播进行分类。窗口一次滑过一个广播的数据，在每个广播重新计算指标。</p>
+<p>时间定义窗口方法将数据处理为离散窗口。将计算出的指标和随后的决策保持在窗口的本地，可以减少数据中反映的任何长期系统更改的影响。有一些窗口方法可以用于数据包定时异常检测。一种选择是处理窗口以获得度量，然后应用这些度量对下一个广播进行分类。窗口一次滑过一个广播的数据，在每个广播重新计算指标。</p>
 <p>在本研究中，我们在离散的、不重叠的、连续的窗口中处理数据，其优点是减少度量的重新计算;在有限的CPU容量的车辆有利。在我们的研究中，对一个窗口的指标进行计算，然后应用到该窗口内的所有广播进行分类，然后评估下一个不重叠的窗口。与滑动窗口相比，这种方法减少了窗口指标需要重新计算的频率。根据窗口中的广播评估指标可以确保评估的广播在检测方法捕获的任何自然发生的调整的范围内。它还确保在旅程一开始就对异常情况进行评估。</p>
 <p>我们将时间窗方法与两种无监督方法(z分数和自回归综合移动平均法)相结合;以及用监督方法(与平均广播间隔比较)进行比较。这些内容载于第四-  b节。使用z分数和基于时间的数据的ARIMA已被证明可以结合来自各种来源的数据，以评估复杂计算机网络受到攻击的可能性。尽管这些方法需要一个阈值分数来优化检测，但它们在适应数据集之间的方差和差异方面需要很少的监督，不需要训练干预。因此，它们可能提供有用的方法来检测CAN  ID广播频率的变化，考虑到CAN操作的未知和不同的汽车。</p>
 <p><strong>z-score:</strong> Z-Score标准化是数据处理的一种常用方法。通过它能够将不同量级的数据转化为统一量度的Z-Score分值进行比较。</p>
@@ -363,8 +362,9 @@
 <p>ARIMA里面的I指Integrated（差分）。 ARIMA（p,d,q）就表示p阶AR，d次差分，q阶MA。  为什么要进行差分呢？ ARIMA的前提是数据是stationary的，也就是说统计特性（mean，variance，correlation等）不会随着时间窗口的不同而变化。</p>
 <h3 id="研究步骤"><a href="#研究步骤" class="headerlink" title="研究步骤"></a>研究步骤</h3><p>对一辆汽车进行初始CAN分析，以建立其CAN广播的速率和一致性，并建立监督检测方法中使用的阈值。</p>
 <ol>
-<li><p>数据捕获  Kvaser Leaf Light</p>
-</li>
+<li>数据捕获  Kvaser Leaf Light</li>
+</ol>
+<ol>
 <li><p>播放率</p>
 <p>55个CAN id被检测到，其中只有两个在整个旅程中被广播。在一段旅程开始时，两个id短暂出现，之后再没有被发现。这些被排除在随后的测试之外。</p>
 <p>一般来说，优先级越高(即ID值越低)的CAN ID广播频率越高，时间变化越小。图1和图2显示了CAN  ID匹配数据包的每秒平均广播次数和广播间隔时间。由于广播频率和时间的模式是相似的旅程，只有一个旅程显示。大多数数据包的广播间隔是一致的。优先级越高的CAN  id的广播频率越高，有的广播速度约为每秒100个，而只有4个CAN id的广播速度小于每秒10个(图1)。</p>
@@ -394,7 +394,13 @@
 <p>测试在R中实现，使用auto.Arima和scale()函数。auto。Arima函数设计用于快速、自动估计时间序列模型，两个函数都是参数化的，有助于高效的接口。</p>
 <p>当数据包操作发生的窗口给出一个正标志时，检测被认为是True Positive (TP)。同样地，当在包含操作记录的窗口中没有检测到标记时，将认为是False Negative (FN)。相反，False Positive  (FP)表示给一个没有操作过数据包的窗口一个正标志，True Negative (TN)表示给这样一个窗口一个负标志。</p>
 <p>对分类器性能的分析利用计算：</p>
-<p>准确性是指正确分类的反应的比例：<br>$$<br>\frac{TP+TN}{TP+FP+TN+FN}<br>$$<br>敏感性(或回忆)是发现实际事件的能力:<br>$$<br>\frac{TP}{TP+FN}<br>$$<br>特异性是指测试对被评估的病情的特异性:<br>$$<br>\frac{TN}{FP+TN}<br>$$<br>准确性可能会产生误导，因为它掩盖了测试数据集中正元素和负元素的相对比例。如果底层测试集包含大量的否定实例，那么只做出否定响应的分类器可以获得很高的准确率。同样，对于只对包含大量肯定实例的数据集作出肯定响应的分类器也是如此。因此，敏感性和特异性也包括在结果分析中。</p>
+<p>准确性是指正确分类的反应的比例：</p>
+<script type="math/tex; mode=display">
+\frac{TP+TN}{TP+FP+TN+FN}</script><p>敏感性(或回忆)是发现实际事件的能力:</p>
+<script type="math/tex; mode=display">
+\frac{TP}{TP+FN}</script><p>特异性是指测试对被评估的病情的特异性:</p>
+<script type="math/tex; mode=display">
+\frac{TN}{FP+TN}</script><p>准确性可能会产生误导，因为它掩盖了测试数据集中正元素和负元素的相对比例。如果底层测试集包含大量的否定实例，那么只做出否定响应的分类器可以获得很高的准确率。同样，对于只对包含大量肯定实例的数据集作出肯定响应的分类器也是如此。因此，敏感性和特异性也包括在结果分析中。</p>
 <p>V 结果与讨论</p>
 <p>测试比较了不同评分阈值(即z分数值、标准化ARIMA残差值和监督方法的绝对时差)下的检出率。这些方法最初是在只包含五个最高优先级CAN  id的样本上进行测试的。这些有最高的广播率，很少变化的时间(图1和2)。由于这些是最高优先级，很可能他们也会携带重要信息，使其成为高攻击目标。随后的分析包括了所有的CAN id，并观察了改变分析窗口大小的影响。</p>
 <p>A. 高优先级CAN id的结果</p>
@@ -579,13 +585,13 @@
       <i class="fa fa-chart-area"></i>
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
-    <span title="Symbols count total">130k</span>
+    <span title="Symbols count total">129k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span class="post-meta-item-text">Reading time total &asymp;</span>
-    <span title="Reading time total">1:58</span>
+    <span title="Reading time total">1:57</span>
 </div><script color="0,0,255" opacity="0.5" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/npm/canvas-nest.js@1/dist/canvas-nest.js"></script>
 
         
